@@ -23,6 +23,26 @@ ideas = {
 			}
 		}
 		
+		HUN_invite_foreign_investors = {
+			allowed = {
+				original_tag = HUN
+				always = no
+			}
+			picture = generic_foreign_capital
+
+			allowed_civil_war = {
+				
+			}
+			
+			modifier = {
+				production_speed_infrastructure_factor = 0.15
+				production_speed_industrial_complex_factor = 0.15
+				production_speed_supply_node_factor = 0.15
+				production_speed_rail_way_factor = 0.1
+				research_speed_factor = 0.2
+			}
+		}
+		
 		HUN_katyusha_idea = {
 			name = HUN_expanded_rocket_works
 			allowed = {
@@ -31,6 +51,10 @@ ideas = {
 			allowed_civil_war = {
 				always = yes
 			}
+			picture = FIN_finnish_federation_of_trade_unions_light	
+			# picture = HUN_apostolic_kingdom_idea	
+			# picture = SWE_varnplikt
+
 			picture = FIN_finnish_federation_of_trade_unions_light	
 			# picture = HUN_apostolic_kingdom_idea	
 			# picture = SWE_varnplikt
@@ -48,9 +72,28 @@ ideas = {
 
 		HUN_isonzo_artillery_works = {
 			name = HUN_expanded_rocket_works
+		HUN_isonzo_artillery_works = {
+			name = HUN_expanded_rocket_works
 			allowed = {
 				original_tag = HUN
 			}
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = SWE_varnplikt
+			
+			equipment_bonus = {
+				artillery_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				anti_tank_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				anti_air_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
 			allowed_civil_war = {
 				always = yes
 			}
