@@ -123,6 +123,7 @@ focus_tree = {
 		search_filters = {FOCUS_FILTER_POLITICAL}
 		completion_reward = {
 			add_political_power = 150
+			add_offsite_building = { type = industrial_complex level = 5 } 
 			
 			hidden_effect = {
 				if = {
