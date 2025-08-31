@@ -50,13 +50,14 @@ on_actions = {
 			every_country = {
 				limit = {
 					tag = USA
-					tag = UK
+					tag = ENG
 					tag = CAN
 					tag = BRA
 					tag = MEX
 					tag = AST
 					tag = SAF
 					tag = RAJ
+					tag = FRA
 				}
 				add_timed_idea = {
 					idea = allies_no_rubber years = 4
