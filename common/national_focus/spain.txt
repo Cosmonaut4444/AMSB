@@ -2758,7 +2758,15 @@ focus_tree = {
 			GER = {
 				add_to_faction = SPA
 			}
-							
+			every_owned_state = {
+            limit = {
+                NOT = { id = 176 } 
+            }
+            add_dynamic_modifier = {
+                modifier = no_airports
+                scope = state
+            }
+        }
 		}
 	}
 
