@@ -2762,7 +2762,7 @@ focus_tree = {
             limit = {
                 NOT = { id = 176 } 
             }
-            add_dynamic_modifier = {
+            state_modifier = {
                 modifier = no_airports
                 scope = state
             }
