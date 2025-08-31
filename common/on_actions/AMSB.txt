@@ -60,7 +60,8 @@ on_actions = {
 					tag = FRA
 				}
 				add_timed_idea = {
-					idea = allies_no_rubber years = 4
+					idea = allies_no_rubber
+					years = 4
 				}
 			}
 			every_country = {
