@@ -47,7 +47,21 @@ on_actions = {
 					add_ideas = no_justify
 				}
 			}
-
+			every_country = {
+				limit = {
+					tag = USA
+					tag = UK
+					tag = CAN
+					tag = BRA
+					tag = MEX
+					tag = AST
+					tag = SAF
+					tag = RAJ
+				}
+				add_timed_idea = {
+					idea = allies_no_rubber years = 4
+				}
+			}
 			every_country = {
 				limit = {
 					NOT = {tag = USA}
