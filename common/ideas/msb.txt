@@ -191,23 +191,6 @@ ideas = {
 		}
 		
 	}
-	allies_no_rubber = {
-			allowed = {
-				always = no
-			}
-
-			allowed_civil_war = {
-				always = yes
-			}
-
-			removal_cost = -1
-
-			picture = ARG_public_works_investment
-			
-			modifier = {
-				production_speed_synthetic_refinery_factor = -2
-			}
-		}
 }
 ideas = {
 	hidden_ideas = {
@@ -222,6 +205,25 @@ ideas = {
 			modifier = {
 				justify_war_goal_time = 100
 			}
+		}
+	}
+}
+ideas = {
+	allies_no_rubber = {
+		allowed = {
+			always = no
+		}
+
+		allowed_civil_war = {
+			always = yes
+		}
+
+		removal_cost = -1
+
+		picture = ARG_public_works_investment
+			
+		modifier = {
+			production_speed_synthetic_refinery_factor = -2
 		}
 	}
 }
