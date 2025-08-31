@@ -25,5 +25,6 @@ no_building_in_soviet_territory = {
 	local_building_slots_factor = -5.0
 }
 no_airports = {
+	icon = GFX_modifiers_SOV_civilian_labor_in_defense
 	state_production_speed_air_base_factor = -1
 }
