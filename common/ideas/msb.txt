@@ -168,6 +168,27 @@ ideas = {
 }
 ideas = {
 	country = {
+		allies_no_rubber = {
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			picture = ARG_public_works_investment
+				
+			modifier = {
+				production_speed_synthetic_refinery_factor = -2
+			}
+		}
+	}
+}
+ideas = {
+	country = {
 		no_tanks = {
 			picture = generic_tank_bonus
 			allowed = {
@@ -208,22 +229,4 @@ ideas = {
 		}
 	}
 }
-ideas = {
-	allies_no_rubber = {
-		allowed = {
-			always = no
-		}
 
-		allowed_civil_war = {
-			always = yes
-		}
-
-		removal_cost = -1
-
-		picture = ARG_public_works_investment
-			
-		modifier = {
-			production_speed_synthetic_refinery_factor = -2
-		}
-	}
-}
