@@ -63,28 +63,26 @@ on_actions = {
 				add_timed_idea = {idea = allies_no_rubber years = 4 }
 			}
 			CAN = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			MEX = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			BRA = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			ENG = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			SAF = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			AST = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
-			}
-			RAJ = { 
-				add_timed_idea = {idea = allies_no_rubber years = 4 }
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			RAJ = {
 				add_ideas = no_planes_raj
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
 			every_country = {
 				add_equipment_to_stockpile = {
