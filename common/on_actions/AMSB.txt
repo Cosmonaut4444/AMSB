@@ -80,10 +80,14 @@ on_actions = {
 			AST = { 
 				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
+			PHI = { 
+				add_timed_idea = {idea = allies_no_rubber years = 5 }
+			}
 			RAJ = {
 				add_ideas = no_planes_raj
 				add_timed_idea = {idea = allies_no_rubber years = 5 }
 			}
+			
 			every_country = {
 				add_equipment_to_stockpile = {
 					type = convoy
