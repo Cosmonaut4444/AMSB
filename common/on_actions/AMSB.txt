@@ -49,23 +49,6 @@ on_actions = {
 			}
 			every_country = {
 				limit = {
-					tag = USA
-					tag = ENG
-					tag = CAN
-					tag = BRA
-					tag = MEX
-					tag = AST
-					tag = SAF
-					tag = RAJ
-					tag = FRA
-				}
-				add_timed_idea = {
-					idea = allies_no_rubber
-					years = 4
-				}
-			}
-			every_country = {
-				limit = {
 					NOT = {tag = USA}
 					NOT = {tag = ENG}
 					NOT = {tag = SOV}
@@ -75,6 +58,30 @@ on_actions = {
 					NOT = {tag = RAJ}
 				}
 				add_ideas = no_planes
+			}
+			USA = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			CAN = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			MEX = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			BRA = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			ENG = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			SAF = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			AST = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
+			}
+			RAJ = { 
+				add_timed_idea = {idea = allies_no_rubber years = 4 }
 			}
 			RAJ = {
 				add_ideas = no_planes_raj
