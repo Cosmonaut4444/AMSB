@@ -25,5 +25,5 @@ no_building_in_soviet_territory = {
 	local_building_slots_factor = -5.0
 }
 no_airports = {
-	production_speed_air_base_factor  = -1.0
+	state_production_speed_air_base_factor = -1
 }
