@@ -821,7 +821,8 @@ ideas = {
 				Planning_speed = -0.3
 				}
 			}	
-		}
+		
+
 
 
 		CAN_canadian_citizenship = {
@@ -839,7 +840,7 @@ ideas = {
 			picture = generic_constitutional_guarantees
 
 			modifier = {
-				
+
 				conscription_factor = 0.1
 				surrender_limit = 0.15
 				autonomy_gain = 0.1
