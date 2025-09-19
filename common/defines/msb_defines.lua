@@ -256,5 +256,6 @@ NDefines.NMilitary.ANTI_AIR_TARGETTING_TO_CHANCE = 0.09 -- Vanilla 0.07
 NDefines.NAir.AA_INDUSTRY_AIR_DAMAGE_FACTOR = 0.10  --Vanilla -0.12
 
 
+
 -- Cosmonaut AMSB
 NDefines.NMilitary.AIR_SUPPORT_BASE = 0.13
