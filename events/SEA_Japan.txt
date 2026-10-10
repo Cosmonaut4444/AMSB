@@ -2534,14 +2534,11 @@ country_event = { #FROM accepts tighter federation
 	option = { #great!
 		name = SEA_japan_foreign_policy.51.a
 
-		# AMSB: mark FROM's controlled core states BEFORE annex. annex_country frees the FROM
-		# country object, so the old post-annex every_controlled_state{ is_core_of=FROM } was a
-		# use-after-free CTD. We flag the states first, then apply compliance to the flagged set.
+		# AMSB: flag ALL of FROM's core states BEFORE annex (annex_country frees a dynamic FROM, so
+		# the old post-annex is_core_of = FROM read freed memory). The reward below still applies to
+		# every flagged state ROOT controls after the annex - the same set as the original script.
 		FROM = {
-			every_controlled_state = {
-				limit = { is_core_of = FROM }
-				set_state_flag = sea_jap_annex_mark
-			}
+			every_core_state = { set_state_flag = sea_jap_annex_mark }
 		}
 		annex_country = {
 			target = FROM
@@ -2551,6 +2548,10 @@ country_event = { #FROM accepts tighter federation
 			limit = { has_state_flag = sea_jap_annex_mark }
 			add_compliance = 25
 			add_extra_state_shared_building_slots = 1
+			clr_state_flag = sea_jap_annex_mark
+		}
+		every_state = {
+			limit = { has_state_flag = sea_jap_annex_mark }
 			clr_state_flag = sea_jap_annex_mark
 		}
 	}
@@ -4602,14 +4603,11 @@ country_event = { #FROM accepts tighter federation
 	option = { #great!
 		name = SEA_japan_foreign_policy.77.a
 
-		# AMSB: mark FROM's controlled core states BEFORE annex. annex_country frees the FROM
-		# country object, so the old post-annex every_controlled_state{ is_core_of=FROM } was a
-		# use-after-free CTD. We flag the states first, then apply compliance to the flagged set.
+		# AMSB: flag ALL of FROM's core states BEFORE annex (annex_country frees a dynamic FROM, so
+		# the old post-annex is_core_of = FROM read freed memory). The reward below still applies to
+		# every flagged state ROOT controls after the annex - the same set as the original script.
 		FROM = {
-			every_controlled_state = {
-				limit = { is_core_of = FROM }
-				set_state_flag = sea_jap_annex_mark
-			}
+			every_core_state = { set_state_flag = sea_jap_annex_mark }
 		}
 		annex_country = {
 			target = FROM
@@ -4619,6 +4617,10 @@ country_event = { #FROM accepts tighter federation
 			limit = { has_state_flag = sea_jap_annex_mark }
 			add_compliance = 25
 			add_extra_state_shared_building_slots = 1
+			clr_state_flag = sea_jap_annex_mark
+		}
+		every_state = {
+			limit = { has_state_flag = sea_jap_annex_mark }
 			clr_state_flag = sea_jap_annex_mark
 		}
 	}
@@ -4965,14 +4967,11 @@ country_event = {
 	option = { 
 		name = SEA_japan_foreign_policy.88.a
 		
-		# AMSB: mark FROM's controlled core states BEFORE annex. annex_country frees the FROM
-		# country object, so the old post-annex every_controlled_state{ is_core_of=FROM } was a
-		# use-after-free CTD. We flag the states first, then apply compliance to the flagged set.
+		# AMSB: flag ALL of FROM's core states BEFORE annex (annex_country frees a dynamic FROM, so
+		# the old post-annex is_core_of = FROM read freed memory). The reward below still applies to
+		# every flagged state ROOT controls after the annex - the same set as the original script.
 		FROM = {
-			every_controlled_state = {
-				limit = { is_core_of = FROM }
-				set_state_flag = sea_jap_annex_mark
-			}
+			every_core_state = { set_state_flag = sea_jap_annex_mark }
 		}
 		annex_country = {
 			target = FROM
@@ -4982,6 +4981,10 @@ country_event = {
 			limit = { has_state_flag = sea_jap_annex_mark }
 			add_compliance = 25
 			add_extra_state_shared_building_slots = 1
+			clr_state_flag = sea_jap_annex_mark
+		}
+		every_state = {
+			limit = { has_state_flag = sea_jap_annex_mark }
 			clr_state_flag = sea_jap_annex_mark
 		}
 		

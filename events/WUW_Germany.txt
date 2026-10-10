@@ -4402,13 +4402,10 @@ country_event = { #Germany integrates us
 	option = { #we had a good run
 		name = wuw_GER_diplomacy.81.a
 
-		# AMSB: mark ROOT's controlled core states BEFORE annex; the hidden_effect below ran
-		# FROM={ every_controlled_state is_core_of=ROOT } AFTER FROM annexed ROOT = use-after-free CTD.
+		# AMSB: flag ALL of ROOT's core states BEFORE FROM annexes ROOT (the old hidden_effect read
+		# is_core_of = ROOT afterwards). FROM still rewards every flagged state it controls afterwards.
 		ROOT = {
-			every_controlled_state = {
-				limit = { is_core_of = ROOT }
-				set_state_flag = wuw_ger_annex_mark
-			}
+			every_core_state = { set_state_flag = wuw_ger_annex_mark }
 		}
 		FROM = {
 			annex_country = {
@@ -4437,6 +4434,10 @@ country_event = { #Germany integrates us
 					add_extra_state_shared_building_slots = 1
 					clr_state_flag = wuw_ger_annex_mark
 				}
+			}
+			every_state = {
+				limit = { has_state_flag = wuw_ger_annex_mark }
+				clr_state_flag = wuw_ger_annex_mark
 			}
 		}
 
@@ -14903,13 +14904,10 @@ country_event = { #FROM accepts tighter federation
 	option = { #great!
 		name = wuw_GER_realpolitik.61.a
 
-		# AMSB: mark FROM's controlled core states BEFORE annex; the old post-annex
-		# every_controlled_state{ is_core_of=FROM } dereferenced the freed FROM = use-after-free CTD.
+		# AMSB: flag ALL of FROM's core states BEFORE annex (the old post-annex is_core_of = FROM read the
+		# annexed country). The reward below still applies to every flagged state ROOT controls afterwards.
 		FROM = {
-			every_controlled_state = {
-				limit = { is_core_of = FROM }
-				set_state_flag = wuw_ger_annex_mark
-			}
+			every_core_state = { set_state_flag = wuw_ger_annex_mark }
 		}
 		annex_country = {
 			target = FROM
@@ -14919,6 +14917,10 @@ country_event = { #FROM accepts tighter federation
 			limit = { has_state_flag = wuw_ger_annex_mark }
 			add_compliance = 50
 			add_extra_state_shared_building_slots = 1
+			clr_state_flag = wuw_ger_annex_mark
+		}
+		every_state = {
+			limit = { has_state_flag = wuw_ger_annex_mark }
 			clr_state_flag = wuw_ger_annex_mark
 		}
 	}

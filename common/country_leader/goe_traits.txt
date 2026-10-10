@@ -1,3 +1,6 @@
+# AMSB: full copy of vanilla 1.19.2 common/country_leader/goe_traits.txt; the only change is the negative
+# training_time(_army)_factor lines commented #AMSB_trainfix (see commit c7ad6010 / master c1975c6e).
+# This file replaces the vanilla file of the same name, so re-diff it against vanilla after every game update.
 leader_traits = {
 	independence_activist = {
 		sprite = 13
