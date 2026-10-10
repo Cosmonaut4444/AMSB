@@ -1,0 +1,17 @@
+# AMSB: medium naval bomber, restored from master after rollback 8e9eba04 deleted it.
+# common/units/equipment/plane_airframes.txt still lets medium airframes take the naval_bomber
+# role and nav_bomber_weapon; without a matching sub-unit the AI's airbase-capacity lookup
+# (CStrategicAir::GetVariantAirBaseTypeValue) dereferences a null sub-unit and crashes the client.
+
+# Must load after plane_airframes.txt (defines the medium_plane_airframe archetype being duplicated).
+
+duplicate_archetypes = {
+
+	medium_plane_naval_bomber_airframe = {
+		archetype = medium_plane_airframe
+		type = naval_bomber
+		picture = archetype_heavy_fighter_equipment
+		air_map_icon_frame = 3
+		interface_overview_category_index = 2
+	}
+}
