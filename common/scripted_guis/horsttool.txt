@@ -87,9 +87,17 @@ st_country_powers = {
 				ROOT = {
 					every_state = { limit = { has_state_flag = ht_live_move_req } clr_state_flag = ht_live_move_req }
 					ht_issue_request_token = yes
-					event_target:ht_req_token = { set_state_flag = ht_live_move_req }
-					set_country_flag = ht_host_move_pending
-					country_event = { id = hosttool.1000 }
+					if = {
+						limit = { check_variable = { ht_req_token_ok = 1 } }
+						event_target:ht_req_token = { set_state_flag = ht_live_move_req }
+						set_country_flag = ht_host_move_pending
+						country_event = { id = hosttool.1000 }
+					}
+					else = {
+						# no free request token (see the annex click): open nothing
+						log = "HOSTTOOL: move-host request refused, no free request token"
+						clear_global_event_target = ht_new_host
+					}
 				}
 			}
 		}
@@ -636,9 +644,19 @@ st_country_powers = {
 					ROOT = {
 						every_state = { limit = { has_state_flag = ht_live_annex_req } clr_state_flag = ht_live_annex_req }
 						ht_issue_request_token = yes
-						event_target:ht_req_token = { set_state_flag = ht_live_annex_req }
-						set_country_flag = ht_annex_pending
-						country_event = { id = hosttool.63 }
+						if = {
+							limit = { check_variable = { ht_req_token_ok = 1 } }
+							event_target:ht_req_token = { set_state_flag = ht_live_annex_req }
+							set_country_flag = ht_annex_pending
+							country_event = { id = hosttool.63 }
+						}
+						else = {
+							# every state is reserved by an unanswered popup: open nothing rather than a
+							# popup that could not be told apart from a later request
+							log = "HOSTTOOL: annex request refused, no free request token"
+							clear_global_event_target = ht_annexed_country
+							clear_global_event_target = ht_annexer_country
+						}
 					}
 				}
 			}

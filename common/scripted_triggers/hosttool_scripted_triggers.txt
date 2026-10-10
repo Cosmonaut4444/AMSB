@@ -8,7 +8,9 @@ ht_annex_request_is_live = {
 	has_country_flag = host
 	has_country_flag = ht_annex_pending
 	OR = {
-		# the popup carries no token: fall back to the pending flag alone
+		# The clicks never open a popup without a token, so this branch only applies if the engine
+		# did not carry the click's local target into the popup; the pending flag alone then keeps
+		# annex/move host working instead of turning every popup into a silent no-op.
 		NOT = { has_event_target = ht_req_token }
 		event_target:ht_req_token = { has_state_flag = ht_live_annex_req }
 	}

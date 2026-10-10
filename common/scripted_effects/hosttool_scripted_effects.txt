@@ -692,14 +692,16 @@ ht_clear_wargoals_both = {
 # carries the live flag (ht_*_request_is_live), so a popup orphaned by Clear All or a handoff can
 # never act on a later request, even one for the same countries.
 # A token stays reserved until its own popup is answered (both options release it, live or not),
-# so an orphaned popup's token is never handed to a later request. Only if every state were
-# reserved (more than a thousand unanswered popups) would no token be saved; that popup then
-# falls back to the pending-flag check.
+# so an orphaned popup's token is never handed to a later request. Temp ht_req_token_ok = 1 tells
+# the caller a token was issued; if every state is reserved (over a thousand unanswered popups)
+# none is, and the caller must not open a popup.
 ht_issue_request_token = {
+	set_temp_variable = { ht_req_token_ok = 0 }
 	random_state = {
 		limit = { NOT = { has_state_flag = ht_req_reserved } }
 		set_state_flag = ht_req_reserved
 		save_event_target_as = ht_req_token
+		set_temp_variable = { ht_req_token_ok = 1 }
 	}
 }
 
