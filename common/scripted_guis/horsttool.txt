@@ -1496,7 +1496,14 @@ st_country_powers = {
 		}	
 		award_states_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
 		transfer_occupation_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
-		annex_country_click_enabled = {	check_variable = { ROOT.marked_states^num > 0 }	owner = { exists = yes } }
+		# Human-played targets stay out (crash-safety guard since the 2026-07-02 audit: annexing a
+		# human's country leaves that client on a dead tag); grey the button instead of letting the
+		# click silently open nothing. Same marked-owner check as tag_switch_button_click_enabled.
+		annex_country_click_enabled = {
+			check_variable = { ROOT.marked_states^num > 0 }
+			owner = { exists = yes }
+			var:ROOT.marked_states^0 = { OWNER = { is_ai = yes } }
+		}
 		puppet_country_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
 		add_cores_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
 		add_cores_to_all_cores_of_selected_nation_click_enabled = { check_variable = { ROOT.marked_states^num > 0 }	owner = { exists = yes } }
