@@ -292,6 +292,8 @@ country_event = {
             clear_global_event_target = ht_new_host
         }
         clear_variable = temp_new_host
+        # this popup is answered: free its token, live or orphaned
+        ht_release_request_token = yes
     }
 
     option = {
@@ -305,6 +307,8 @@ country_event = {
             clear_global_event_target = ht_new_host
         }
         clear_variable = temp_new_host
+        # this popup is answered: free its token, live or orphaned
+        ht_release_request_token = yes
     }
 }
 
@@ -883,6 +887,8 @@ country_event = {
             clear_variable = taker
             clear_variable = first_marked_state
         }
+        # this popup is answered: free its token, live or orphaned
+        ht_release_request_token = yes
     }
 
     option = {
@@ -898,6 +904,8 @@ country_event = {
             clear_global_event_target = ht_annexed_country
             clear_global_event_target = ht_annexer_country
         }
+        # this popup is answered: free its token, live or orphaned
+        ht_release_request_token = yes
     }
 }
 
