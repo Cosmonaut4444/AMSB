@@ -1,29 +1,16 @@
 # Host tool confirmation popups (events/horsttool.txt hosttool.63 / hosttool.1000).
-# A click saves its request twice: globally (the live request, which a newer click replaces)
-# and as LOCAL event targets that the engine copies into the popup it fires. A popup may act
-# only while its own copy is still the live request, so a popup orphaned by Clear All or by a
-# host handoff stays a no-op even after the host opens a new request.
-# Evaluated in the popup's scope: the host country that clicked.
+# Each click gives its request a token state (ht_issue_request_token, saved as the LOCAL event
+# target ht_req_token that travels into the popup) and flags that state as the live request.
+# Answering, Clear All and a host handoff all drop the flag, so a popup acts only on the exact
+# request it was opened for. Evaluated in the popup's scope: the host country that clicked.
 
 ht_annex_request_is_live = {
 	has_country_flag = host
 	has_country_flag = ht_annex_pending
 	OR = {
-		# the popup carries no copy of its request: fall back to the pending flag alone
-		NOT = { has_event_target = ht_req_host }
-		AND = {
-			event_target:ht_annexed_country = { tag = event_target:ht_req_annexed }
-			event_target:ht_annexer_country = { tag = event_target:ht_req_annexer }
-		}
-		# this popup's request is the live one, but one side died before the answer
-		AND = {
-			NOT = { event_target:ht_annexed_country = { exists = yes } }
-			NOT = { event_target:ht_req_annexed = { exists = yes } }
-		}
-		AND = {
-			NOT = { event_target:ht_annexer_country = { exists = yes } }
-			NOT = { event_target:ht_req_annexer = { exists = yes } }
-		}
+		# the popup carries no token: fall back to the pending flag alone
+		NOT = { has_event_target = ht_req_token }
+		event_target:ht_req_token = { has_state_flag = ht_live_annex_req }
 	}
 }
 
@@ -31,11 +18,7 @@ ht_host_move_request_is_live = {
 	has_country_flag = host
 	has_country_flag = ht_host_move_pending
 	OR = {
-		NOT = { has_event_target = ht_req_host }
-		event_target:ht_new_host = { tag = event_target:ht_req_new_host }
-		AND = {
-			NOT = { event_target:ht_new_host = { exists = yes } }
-			NOT = { event_target:ht_req_new_host = { exists = yes } }
-		}
+		NOT = { has_event_target = ht_req_token }
+		event_target:ht_req_token = { has_state_flag = ht_live_move_req }
 	}
 }

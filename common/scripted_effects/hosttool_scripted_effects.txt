@@ -686,6 +686,23 @@ ht_clear_wargoals_both = {
 	}
 }
 
+# Host tool confirmation popups: gives the request being opened an identity token. The next
+# state id is saved as the LOCAL event target ht_req_token, which the engine copies into the
+# popup fired afterwards; the caller flags that state as the live request. A popup may act only
+# while its own token still carries the live flag (ht_*_request_is_live), so a popup orphaned
+# by Clear All or a handoff can never act on a later request, even one for the same countries.
+# Ids 1-1000 all exist (history/states holds 1-1081); a popup could only be mistaken for a later
+# request after 1000 more requests while it stayed open. A numeric variable used as a scope is a
+# state (vanilla: SOV_scripted_effects.txt SOV_stalinist_civil_war_start_state).
+ht_issue_request_token = {
+	add_to_variable = { global.ht_req_seq = 1 }
+	if = {
+		limit = { check_variable = { global.ht_req_seq > 1000 } }
+		set_variable = { global.ht_req_seq = 1 }
+	}
+	var:global.ht_req_seq = { save_event_target_as = ht_req_token }
+}
+
 # State scope; ROOT.compl is the host-tool value selected in the scripted GUI.
 ht_set_compliance_from_root_value = {
 	if = { limit = { check_variable = { ROOT.compl < 5 } } set_compliance = 0 }

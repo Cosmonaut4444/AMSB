@@ -228,8 +228,8 @@ country_event = {
     id = hosttool.1000
     title = "Move Host Tool Confirmation"
     # each popup names its own request; the global fallback covers a popup without a copy
-    desc = { text = hosttool.1000.desc_req trigger = { has_event_target = ht_req_host } }
-    desc = { text = hosttool.1000.desc trigger = { NOT = { has_event_target = ht_req_host } } }
+    desc = { text = hosttool.1000.desc_req trigger = { has_event_target = ht_req_token } }
+    desc = { text = hosttool.1000.desc trigger = { NOT = { has_event_target = ht_req_token } } }
     picture = GFX_report_event_001
     is_triggered_only = yes
 
@@ -266,6 +266,11 @@ country_event = {
                 # the old host's open annex request dies with its authority
                 clear_global_event_target = ht_annexed_country
                 clear_global_event_target = ht_annexer_country
+                every_state = {
+                    limit = { OR = { has_state_flag = ht_live_annex_req has_state_flag = ht_live_move_req } }
+                    clr_state_flag = ht_live_annex_req
+                    clr_state_flag = ht_live_move_req
+                }
                 # Old host's marked states must not leak into the new host's session
                 for_each_scope_loop = {
                     array = marked_states
@@ -283,6 +288,7 @@ country_event = {
             }
             # else: target died before the confirm - keep the current host untouched
             clr_country_flag = ht_host_move_pending
+            every_state = { limit = { has_state_flag = ht_live_move_req } clr_state_flag = ht_live_move_req }
             clear_global_event_target = ht_new_host
         }
         clear_variable = temp_new_host
@@ -295,6 +301,7 @@ country_event = {
         if = {
             limit = { ht_host_move_request_is_live = yes }
             clr_country_flag = ht_host_move_pending
+            every_state = { limit = { has_state_flag = ht_live_move_req } clr_state_flag = ht_live_move_req }
             clear_global_event_target = ht_new_host
         }
         clear_variable = temp_new_host
@@ -821,8 +828,8 @@ country_event = {
     id = hosttool.63
     title = "Annex Confirmation"
     # each popup names its own request; the global fallback covers a popup without a copy
-    desc = { text = hosttool.63.desc_req trigger = { has_event_target = ht_req_host } }
-    desc = { text = hosttool.63.desc trigger = { NOT = { has_event_target = ht_req_host } } }
+    desc = { text = hosttool.63.desc_req trigger = { has_event_target = ht_req_token } }
+    desc = { text = hosttool.63.desc trigger = { NOT = { has_event_target = ht_req_token } } }
     picture = GFX_report_event_001
     is_triggered_only = yes
 
@@ -834,6 +841,7 @@ country_event = {
         if = {
             limit = { ht_annex_request_is_live = yes }
             clr_country_flag = ht_annex_pending
+            every_state = { limit = { has_state_flag = ht_live_annex_req } clr_state_flag = ht_live_annex_req }
             # AMSB: both sides were captured as ENGINE-MANAGED global event targets at click time
             # (annex_country_click). The engine invalidates them if either country dies before this
             # option runs, so the liveness guard turns a stale confirm into a safe no-op instead of
@@ -884,6 +892,7 @@ country_event = {
         if = {
             limit = { ht_annex_request_is_live = yes }
             clr_country_flag = ht_annex_pending
+            every_state = { limit = { has_state_flag = ht_live_annex_req } clr_state_flag = ht_live_annex_req }
             clear_variable = target
             clear_variable = taker
             clear_global_event_target = ht_annexed_country

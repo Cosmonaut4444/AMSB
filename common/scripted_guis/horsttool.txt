@@ -85,7 +85,9 @@ st_country_powers = {
 					save_event_target_as = ht_req_new_host
 				}
 				ROOT = {
-					save_event_target_as = ht_req_host
+					every_state = { limit = { has_state_flag = ht_live_move_req } clr_state_flag = ht_live_move_req }
+					ht_issue_request_token = yes
+					event_target:ht_req_token = { set_state_flag = ht_live_move_req }
 					set_country_flag = ht_host_move_pending
 					country_event = { id = hosttool.1000 }
 				}
@@ -282,6 +284,11 @@ st_country_powers = {
 				# is a permanent no-op, even after a new request is made.
 				clr_country_flag = ht_annex_pending
 				clr_country_flag = ht_host_move_pending
+				every_state = {
+					limit = { OR = { has_state_flag = ht_live_annex_req has_state_flag = ht_live_move_req } }
+					clr_state_flag = ht_live_annex_req
+					clr_state_flag = ht_live_move_req
+				}
 				clear_global_event_target = ht_annexed_country
 				clear_global_event_target = ht_annexer_country
 				clear_global_event_target = ht_new_host
@@ -538,8 +545,11 @@ st_country_powers = {
 			else = { ht_set_resistance_from_root_value = yes }
 		}
 		add_cheat_click = {
-			set_variable = { ROOT.taker = this}
-			var:taker = {
+			# Grants go to the selected state's owner. This used to store the state in permanent
+			# ROOT.taker and then read bare var:taker from the state's own scope; THIS already is
+			# that state, so the grant now scopes straight to its owner whatever the variable lookup does.
+			if = {
+				limit = { owner = { exists = yes } }
 				owner = { set_variable = { Root.target_country = this }
 					if = { limit = { ROOT = { check_variable = { Root.selected_cheat = 1 } } } generic_bonus_1 = yes }
 					if = { limit = { ROOT = { check_variable = { Root.selected_cheat = 2 } } } generic_bonus_3 = yes }
@@ -574,12 +584,13 @@ st_country_powers = {
 					if = { limit = { ROOT = { check_variable = { Root.selected_cheat = 31 } } } add_equipment_to_stockpile = { type = convoy_1 amount = 100 } }
 					if = { limit = { ROOT = { check_variable = { Root.selected_cheat = 32 } } } add_fuel = 50000 }
 				}	
-			}
-			GER={
-				set_variable = { this.target_country = Root.target_country }
-				set_variable = { this.selected_cheat = Root.selected_cheat }
-				news_event = { id = horsttool.1}
-				clear_variable = this.target_country
+				# notify only when a grant actually went out
+				GER={
+					set_variable = { this.target_country = Root.target_country }
+					set_variable = { this.selected_cheat = Root.selected_cheat }
+					news_event = { id = horsttool.1}
+					clear_variable = this.target_country
+				}
 			}
 			clear_variable = ROOT.taker
 			clear_variable = ROOT.target_country
@@ -602,10 +613,9 @@ st_country_powers = {
 				clear_global_event_target = ht_annexed_country
 				clear_global_event_target = ht_annexer_country
 				# Each side is saved twice: as the live request (global) and as a LOCAL event target,
-				# which the engine copies into the popup fired below, so every popup carries its own
+				# which the engine copies into the popup fired below so the popup names its own
 				# request (vanilla does the same: POL.txt POL_colony_purchase -> NSB_poland_events.5).
-				# hosttool.63 acts only while the two agree, so a popup orphaned by Clear All or a
-				# host handoff can never execute or cancel a later request.
+				# The request's identity is its token (ht_issue_request_token below).
 				owner = {
 					set_variable = { ROOT.taker = this }
 					save_global_event_target_as = ht_annexer_country
@@ -624,7 +634,9 @@ st_country_powers = {
 						var:ROOT.target = { is_ai = yes }	# never annex a human player's country
 					}
 					ROOT = {
-						save_event_target_as = ht_req_host	# marks that this popup carries its request
+						every_state = { limit = { has_state_flag = ht_live_annex_req } clr_state_flag = ht_live_annex_req }
+						ht_issue_request_token = yes
+						event_target:ht_req_token = { set_state_flag = ht_live_annex_req }
 						set_country_flag = ht_annex_pending
 						country_event = { id = hosttool.63 }
 					}
