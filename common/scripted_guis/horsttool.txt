@@ -61,25 +61,31 @@ st_country_powers = {
 					save_global_event_target_as = ht_aifix_country
 					VEN = { change_tag_from = var:marks }
 				}
-				# Return event scheduled on the HOST, not on the glitched country (if that country
-				# dies first the cleanup must still run or the player is wedged on VEN forever) and
-				# not on VEN (landless, so not guaranteed to process queued events). hosttool.60
-				# only reads event targets, so the country it fires on does not matter.
+				# The return event must run even if the glitched country dies meanwhile, or the player
+				# is wedged on VEN and the guard above never releases. VEN itself owns no states, so
+				# it is not guaranteed to process queued events. It is scheduled on two countries that
+				# do exist - the host and WST (wasteland, owns uncapturable states) - so it survives
+				# either one disappearing; the second copy finds the guard released and does nothing.
 				ROOT = { country_event = { id = hosttool.60 hours = 2 } }
-				every_country = {
-					limit = { is_ai = no }
-					news_event = { id = hosttool.61 }
-				}
+				WST = { country_event = { id = hosttool.60 hours = 2 } }
+				# news hosttool.61 is major: one send reaches every player
+				ROOT = { news_event = { id = hosttool.61 } }
 			}
 		}
 
 		change_host_nation_click = {
-			owner = {
-				# Engine-managed capture at CLICK time for the delayed confirmation.
-				save_global_event_target_as = ht_new_host
-			}
-			ROOT = {
-				country_event = { id = hosttool.1000 }
+			# One move confirmation in flight at a time (mirrors ht_annex_pending): a second click
+			# would overwrite ht_new_host under the popup that is already open.
+			if = {
+				limit = { ROOT = { NOT = { has_country_flag = ht_host_move_pending } } }
+				owner = {
+					# Engine-managed capture at CLICK time for the delayed confirmation.
+					save_global_event_target_as = ht_new_host
+				}
+				ROOT = {
+					set_country_flag = ht_host_move_pending
+					country_event = { id = hosttool.1000 }
+				}
 			}
 		}
 
@@ -141,6 +147,10 @@ st_country_powers = {
 							type = annex_everything
 						}
 					}
+					# notification copies: the capture targets are cleared below, and the popup
+					# desc renders whenever each player opens it
+					event_target:ht_war_a = { save_global_event_target_as = ht_note_a }
+					event_target:ht_war_b = { save_global_event_target_as = ht_note_b }
 					ROOT = { news_event = { id = hosttool.21 } }
 				}
 			}
@@ -148,6 +158,10 @@ st_country_powers = {
 			clear_variable = global.war_target
 			clear_variable = global.ht_act_state
 			clear_variable = global.ht_oth_state
+			# Cleared every click, like the other two-party flows: an unowned marked state must
+			# find no target, not the previous war's defender.
+			clear_global_event_target = ht_war_a
+			clear_global_event_target = ht_war_b
 		}
 		addpp_click = {
 			owner={
@@ -260,6 +274,10 @@ st_country_powers = {
 				clr_country_flag = ht_spirit_add
 				clr_country_flag = ht_focus_unc
 				clr_country_flag = ht_focus_com
+				# Recovery for a confirmation popup that never got answered: its options act only
+				# while their pending flag is set, so an open popup becomes a harmless no-op.
+				clr_country_flag = ht_annex_pending
+				clr_country_flag = ht_host_move_pending
 				every_country = {
 					clear_variable = pause_blocker_variable
 				}
@@ -1221,7 +1239,7 @@ st_country_powers = {
 				set_variable = { var = pause_blocker_variable value = 1 } 
 			}
 			clear_variable = pause_dropdown_open
-			news_event = { id = hosttool.20 }
+			ROOT = { news_event = { id = hosttool.20 } } # news_event needs COUNTRY scope; bare scope here is the selected state
 		}
 
 		pause_blocker_host_click = { 
@@ -1230,7 +1248,7 @@ st_country_powers = {
 				set_variable = { var = pause_blocker_variable value = 2 } 
 			}
 			clear_variable = pause_dropdown_open
-			news_event = { id = hosttool.20 }
+			ROOT = { news_event = { id = hosttool.20 } } # news_event needs COUNTRY scope; bare scope here is the selected state
 		}
 
 		pause_blocker_major_click = {
@@ -1239,7 +1257,7 @@ st_country_powers = {
 				set_variable = { var = pause_blocker_variable value = 3 } 
 			}
 			clear_variable = pause_dropdown_open
-			news_event = { id = hosttool.20 }
+			ROOT = { news_event = { id = hosttool.20 } } # news_event needs COUNTRY scope; bare scope here is the selected state
 		}
 		pause_blocker_unblock_country_click = {
 			owner = {
@@ -1413,6 +1431,8 @@ st_country_powers = {
 				ROOT = { has_country_flag = ht_law_mode }
 				ROOT = { has_country_flag = ht_spirit_add }
 				ROOT = { has_country_flag = ht_spirit_remove }
+				ROOT = { has_country_flag = ht_annex_pending }
+				ROOT = { has_country_flag = ht_host_move_pending }
 				# FIX 2026-07-26: this button's own effect ends with
 				# WST = { set_variable = { pause_blocker_variable = 1 } }, and 1 is the DEFAULT
 				# ("Everyone" - see loc PAUSE1). Testing > 0 therefore latched the button's own

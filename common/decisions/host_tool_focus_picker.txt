@@ -833,25 +833,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = argentine_focus_tree
 							NOT = { has_completed_focus = ARG_align_with_the_soviets }
-							AND = {
-
-			has_civil_war = no
-			NOT = { has_war_with = SOU }
-			is_subject = no
-			is_in_faction = no
-			NOT = {
-				any_other_country = {
-					is_in_faction_with = SOU
-					has_war_with = ARG	
-				}
-			}
-			SOU = {
-				is_faction_leader = yes
-				has_government = communism
-				is_subject = no
-			}
-		
-							}
 						}
 					}
 				}
@@ -2011,20 +1992,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = argentine_focus_tree
 							NOT = { has_completed_focus = ARG_demand_spanish_compensation }
-							AND = {
-
-			has_global_flag = scw_over
-			SPA = {
-				has_capitulated = no
-				owns_state = 297
-			}
-			
-			custom_trigger_tooltip = {
-					tooltip = ARG_argentinian_volunteers_in_spain_flag
-					has_country_flag = ARG_argentinian_volunteers_in_spain 
-			}
-		
-							}
 						}
 					}
 				}
@@ -3597,34 +3564,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = argentine_focus_tree
 							NOT = { has_completed_focus = ARG_invite_spanish_nationalists }
-							AND = {
-
-			has_global_flag = scw_over
-			if = {
-				limit = {
-					has_dlc = "La Resistance"
-				}
-				any_other_country = {
-				NOT = {
-					tag = SPA
-				}
-					has_civil_war = no
-					}
-				}
-			else = {
-				any_country = {
-					original_tag = SPR
-				NOT = {
-					OR = {
-						has_government = fascism
-						has_government = neutrality
-					}
-				}
-					has_civil_war = no
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -4564,17 +4503,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = argentine_focus_tree
 							NOT = { has_completed_focus = ARG_reach_out_to_the_soviet_union }
-							AND = {
-
-			SOU = {
-				has_government = communism
-			}
-			has_civil_war = no
-			NOT = {
-				has_completed_focus = ARG_viva_la_revolucion
-			}
-		
-							}
 						}
 					}
 				}
@@ -17602,14 +17530,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = australia_taog_focus
 							NOT = { has_completed_focus = AST_undeniably_ours }
-							AND = {
-
-			custom_trigger_tooltip = {
-				tooltip = vichy_exist_trigger
-				country_exists = VIC
-			}
-		
-							}
 						}
 					}
 				}
@@ -17838,22 +17758,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = australia_taog_focus
 							NOT = { has_completed_focus = AST_vichy_out_of_africa }
-							AND = {
-
-			custom_trigger_tooltip = {
-				tooltip = vichy_exist_trigger
-				country_exists = VIC
-			}
-
-			custom_trigger_tooltip = {
-				tooltip = vichy_in_africa_trigger
-				any_state = {
-					is_controlled_by = VIC
-					is_on_continent = africa
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -21609,14 +21513,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = brazil_tree
 							NOT = { has_completed_focus = BRA_free_prestes }
-							AND = {
-
-			NOT = {
-				has_war_with = SOU
-				has_completed_focus = BRA_launch_the_revolution
-			}
-		
-							}
 						}
 					}
 				}
@@ -22279,68 +22175,6 @@ host_tool_focus_category = {
 					}
 					else = {
 						complete_national_focus = BRA_invest_in_the_armed_forces
-					}
-					save_global_event_target_as = ht_note_a
-				}
-			}
-			if = { limit = { NOT = { has_country_flag = ht_notify_cd } } set_country_flag = { flag = ht_notify_cd days = 1 } news_event = { id = hosttool.73 } }
-			}
-		}
-	}
-	ht_fp_BRA_invite_foreign_companies = {
-		icon = generic_research
-		cost = 0
-		visible = {
-			event_target:ht_focus_state = { owner = { exists = yes } }
-			OR = {
-				AND = {
-					has_country_flag = ht_focus_unc
-					event_target:ht_focus_state = { OWNER = { has_completed_focus = BRA_invite_foreign_companies } }
-				}
-				AND = {
-					has_country_flag = ht_focus_com
-					event_target:ht_focus_state = {
-						OWNER = {
-							has_focus_tree = brazil_tree
-							NOT = { has_completed_focus = BRA_invite_foreign_companies }
-							AND = {
-
-			OR = {
-				USA = {
-					exists = yes
-					has_government = democratic
-				}
-				ENG = {
-					exists = yes
-					has_government = democratic
-				}
-				FRA = {
-					exists = yes
-					has_government = democratic
-				}
-				SWE = {
-					exists = yes
-					has_government = democratic
-				}
-			}
-		
-							}
-						}
-					}
-				}
-			}
-		}
-		complete_effect = {
-			if = {
-				limit = { event_target:ht_focus_state = { owner = { exists = yes } } }
-			event_target:ht_focus_state = {
-				owner = {
-					if = {
-						limit = { ROOT = { has_country_flag = ht_focus_unc } }
-						uncomplete_national_focus = { focus = BRA_invite_foreign_companies uncomplete_children = yes refund_political_power = yes }
-					}
-					else = {
-						complete_national_focus = BRA_invite_foreign_companies
 					}
 					save_global_event_target_as = ht_note_a
 				}
@@ -24121,17 +23955,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = brazil_tree
 							NOT = { has_completed_focus = BRA_seek_soviet_support }
-							AND = {
-
-			NOT = {
-				OR = {
-					has_war_with = SOU
-					has_government = communism
-				}
-			}
-			communism > 0.3
-		
-							}
 						}
 					}
 				}
@@ -26520,11 +26343,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = bulgarian_focus
 							NOT = { has_completed_focus = BUL_balkan_research_cooperation }
-							AND = {
-
-			BUL_is_not_alone_in_faction = yes
-		
-							}
 						}
 					}
 				}
@@ -26698,11 +26516,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = bulgarian_focus
 							NOT = { has_completed_focus = BUL_bulgarian_academy_of_sciences }
-							AND = {
-
-			BUL_is_not_alone_in_faction = yes
-		
-							}
 						}
 					}
 				}
@@ -29005,11 +28818,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = bulgarian_focus
 							NOT = { has_completed_focus = BUL_joint_research_effort }
-							AND = {
-
-			BUL_is_not_alone_in_faction = yes
-		
-							}
 						}
 					}
 				}
@@ -29453,11 +29261,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = bulgarian_focus
 							NOT = { has_completed_focus = BUL_military_secrets_sharing }
-							AND = {
-
-			BUL_is_not_alone_in_faction = yes
-		
-							}
 						}
 					}
 				}
@@ -30534,11 +30337,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = bulgarian_focus
 							NOT = { has_completed_focus = BUL_research_sharing }
-							AND = {
-
-			BUL_is_not_alone_in_faction = yes
-		
-							}
 						}
 					}
 				}
@@ -35150,21 +34948,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_camco }
-							AND = {
-
-		OR = {
-			AND = {
-				has_completed_focus = CHI_british_cooperation
-				ENG_will_support = yes
-			}
-			AND = {
-				has_completed_focus = CHI_mission_to_the_us
-				USA_will_support = yes
-			}
-		}
-		is_subject = no
-	
-							}
 						}
 					}
 				}
@@ -35205,14 +34988,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_carrier_air_wing }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -35253,15 +35028,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_chinese_expeditionary_force }
-							AND = {
-
-		NOT = { USA = { has_country_flag = joseph_stilwell_sent_to_china } }
-		USA_will_support = yes
-		USA = {
-			has_civil_war = no
-		}
-	
-							}
 						}
 					}
 				}
@@ -35342,11 +35108,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_chinese_panzers }
-							AND = {
-
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -35387,13 +35148,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_closer_ties_with_germany }
-							AND = {
-
-		NOT = { has_war_with = GER }
-		NOT = { has_global_flag = falkenhausen_recalled }
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -35434,11 +35188,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_coastal_patrol_planes }
-							AND = {
-
-		JAP_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -35519,14 +35268,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_combined_arms_warfare }
-							AND = {
-
-		OR = {
-			GER_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -35612,14 +35353,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_construction_battalions }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			ENG_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -35758,14 +35491,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_elite_mountaineers }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -35846,20 +35571,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_fighter_purchases }
-							AND = {
-
-		OR = {
-			AND = {
-				has_completed_focus = CHI_british_cooperation
-				ENG_will_support = yes
-			}
-			AND = {
-				has_completed_focus = CHI_mission_to_the_us
-				USA_will_support = yes
-			}
-		}
-	
-							}
 						}
 					}
 				}
@@ -35900,11 +35611,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_french_drill }
-							AND = {
-
-		FRA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -35945,11 +35651,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_french_military_mission }
-							AND = {
-
-		FRA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -35990,12 +35691,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_give_falkenhausen_citizenship }
-							AND = {
-
-		NOT = { has_global_flag = falkenhausen_recalled }
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -36116,11 +35811,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_heavy_cruiser_project }
-							AND = {
-
-		USA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -36161,14 +35851,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_heavy_weapons }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -36209,12 +35891,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_hire_chennault }
-							AND = {
-
-		USA_will_support = yes
-		is_subject = no
-	
-							}
 						}
 					}
 				}
@@ -36255,11 +35931,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_hire_soviet_designer }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -36460,17 +36131,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_investment_into_shipbuilding }
-							AND = {
-
-		any_controlled_state = {
-			is_coastal = yes
-		}
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -36551,11 +36211,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_invite_soviet_advisers }
-							AND = {
-
-		SOV_will_support = yes	
-	
-							}
 						}
 					}
 				}
@@ -36596,12 +36251,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_invite_the_flying_tigers }
-							AND = {
-
-		USA_will_support = yes
-		is_subject = no
-	
-							}
 						}
 					}
 				}
@@ -36642,11 +36291,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_joint_tank_development }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -36727,11 +36371,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_light_cruiser_project }
-							AND = {
-
-		USA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -37002,14 +36641,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_modern_logistics }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			ENG_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -37050,11 +36681,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_modern_submarines }
-							AND = {
-
-		JAP_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -37095,14 +36721,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_naval_aviation }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -37188,14 +36806,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_order_destroyers }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -37281,14 +36891,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_purchase_tanks }
-							AND = {
-
-		OR = {
-			GER_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -37329,11 +36931,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_rapprochement_with_soviet_union }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -37579,21 +37176,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_camco }
-							AND = {
-
-		OR = {
-			AND = {
-				has_completed_focus = CHI_sea_british_cooperation
-				ENG_will_support = yes
-			}
-			AND = {
-				has_completed_focus = CHI_sea_mission_to_the_us
-				USA_will_support = yes
-			}
-		}
-		is_subject = no
-	
-							}
 						}
 					}
 				}
@@ -37634,14 +37216,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_carrier_air_wing }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -37682,15 +37256,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_chinese_expeditionary_force }
-							AND = {
-
-		NOT = { USA = { has_country_flag = joseph_stilwell_sent_to_china } }
-		USA_will_support = yes
-		USA = {
-			has_civil_war = no
-		}
-	
-							}
 						}
 					}
 				}
@@ -37771,11 +37336,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_chinese_panzers }
-							AND = {
-
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -37816,13 +37376,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_closer_ties_with_germany }
-							AND = {
-
-		NOT = { has_war_with = GER }
-		NOT = { has_global_flag = falkenhausen_recalled }
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -37863,11 +37416,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_coastal_patrol_planes }
-							AND = {
-
-		JAP_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -37948,14 +37496,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_combined_arms_warfare }
-							AND = {
-
-		OR = {
-			GER_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -37996,14 +37536,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_construction_battalions }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			ENG_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -38044,14 +37576,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_elite_mountaineers }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -38132,20 +37656,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_fighter_purchases }
-							AND = {
-
-		OR = {
-			AND = {
-				has_completed_focus = CHI_sea_british_cooperation
-				ENG_will_support = yes
-			}
-			AND = {
-				has_completed_focus = CHI_sea_mission_to_the_us
-				USA_will_support = yes
-			}
-		}
-	
-							}
 						}
 					}
 				}
@@ -38186,11 +37696,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_french_drill }
-							AND = {
-
-		FRA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -38231,11 +37736,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_french_military_mission }
-							AND = {
-
-		FRA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -38276,12 +37776,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_give_falkenhausen_citizenship }
-							AND = {
-
-		NOT = { has_global_flag = falkenhausen_recalled }
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -38362,11 +37856,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_heavy_cruiser_project }
-							AND = {
-
-		USA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -38407,14 +37896,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_heavy_weapons }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -38455,12 +37936,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_hire_chennault }
-							AND = {
-
-		USA_will_support = yes
-		is_subject = no
-	
-							}
 						}
 					}
 				}
@@ -38501,11 +37976,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_hire_soviet_designer }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -38546,17 +38016,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_investment_into_shipbuilding }
-							AND = {
-
-		any_controlled_state = {
-			is_coastal = yes
-		}
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -38637,11 +38096,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_invite_soviet_advisers }
-							AND = {
-
-		SOV_will_support = yes	
-	
-							}
 						}
 					}
 				}
@@ -38682,12 +38136,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_invite_the_flying_tigers }
-							AND = {
-
-		USA_will_support = yes
-		is_subject = no
-	
-							}
 						}
 					}
 				}
@@ -38728,11 +38176,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_joint_tank_development }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -38813,11 +38256,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_light_cruiser_project }
-							AND = {
-
-		USA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39088,14 +38526,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_modern_logistics }
-							AND = {
-
-		OR = {
-			FRA_will_support = yes
-			ENG_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -39136,11 +38566,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_modern_submarines }
-							AND = {
-
-		JAP_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39181,14 +38606,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_naval_aviation }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -39229,14 +38646,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_order_destroyers }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -39277,14 +38686,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_purchase_tanks }
-							AND = {
-
-		OR = {
-			GER_will_support = yes
-			SOV_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -39325,11 +38726,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_rapprochement_with_soviet_union }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39455,11 +38851,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_sino_american_cooperative_organization }
-							AND = {
-
-		USA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39500,11 +38891,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_small_arms_expertise }
-							AND = {
-
-		FRA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39545,11 +38931,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_tank_plant }
-							AND = {
-
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39683,11 +39064,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_the_soviet_volunteer_group }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39728,14 +39104,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_train_marines }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -39776,12 +39144,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus_tsr
 							NOT = { has_completed_focus = CHI_sea_wargaming_division }
-							AND = {
-
-		NOT = { has_global_flag = falkenhausen_recalled }
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39862,11 +39224,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_sino_american_cooperative_organization }
-							AND = {
-
-		USA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39907,11 +39264,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_small_arms_expertise }
-							AND = {
-
-		FRA_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -39952,11 +39304,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_tank_plant }
-							AND = {
-
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -40090,11 +39437,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_the_soviet_volunteer_group }
-							AND = {
-
-		SOV_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -40135,14 +39477,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_train_marines }
-							AND = {
-
-		OR = {
-			USA_will_support = yes
-			JAP_will_support = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -40183,12 +39517,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = manchukuo_focus
 							NOT = { has_completed_focus = CHI_wargaming_division }
-							AND = {
-
-		NOT = { has_global_flag = falkenhausen_recalled }
-		GER_will_support = yes
-	
-							}
 						}
 					}
 				}
@@ -43057,14 +42385,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = ENG_war_with_germany }
-							AND = {
-
-			has_war = no
-			GER = {
-				ENG_focus_available_war = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -43105,15 +42425,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = ENG_war_with_japan }
-							AND = {
-
-			has_offensive_war = no
-			JAP = {
-				ENG_focus_available_war = yes
-			}	
-			has_government = democratic
-		
-							}
 						}
 					}
 				}
@@ -44888,17 +44199,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = finnish_focus
 							NOT = { has_completed_focus = FIN_expansion_towards_the_atlantic }
-							AND = {
-
-			#state is in the atlantic
-			custom_trigger_tooltip = {
-				tooltip = FIN_state_is_in_the_atlantic_tt
-				any_controlled_state = {
-					FIN_state_is_european_and_on_the_atlantic = yes
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -47053,34 +46353,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = finnish_focus
 							NOT = { has_completed_focus = FIN_mineral_wealth_development }
-							AND = {
-
-			any_core_state = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-				controller = {
-					NORDIC_is_nordic = yes
-				}
-				OR = {
-					has_resources_amount = {
-						resource = steel
-						amount > 0
-					}
-					has_resources_amount = {
-						resource = chromium
-						amount > 0
-					}
-					has_resources_amount = {
-						resource = tungsten
-						amount > 0
-					}
-					has_resources_amount = {
-						resource = aluminium
-						amount > 0
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -49863,25 +49135,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = finnish_focus
 							NOT = { has_completed_focus = FIN_united_under_the_north_star }
-							AND = {
-
-			OR = {
-				has_government = communism
-				has_government = democratic
-			}
-			has_civil_war = no
-			is_subject = no
-			any_other_country = {
-				OR = {
-					tag = SWE
-					tag = NOR
-					tag = DEN
-					
-				}
-				FIN_country_can_be_invited_into_faction_socialist = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -53314,23 +52567,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = french_focus
 							NOT = { has_completed_focus = FRA_invest_in_west_africa }
-							AND = {
-
-			any_state = {
-				OR = {
-					state = 272
-					state = 780
-					state = 556
-					state = 779
-					state = 778
-					state = 781
-					state = 776
-					state = 777
-				}	
-				is_owned_or_subject_trigger = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -55579,7 +54815,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_absorb_the_abwehr_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -56746,13 +55982,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_anti_comintern_pact }
-							AND = {
-
-			is_subject = no
-			NOT = { has_government = communism }
-			NOT = { is_in_faction_with = SOU }
-		
-							}
 						}
 					}
 				}
@@ -57679,20 +56908,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_atlantic_naval_bases }
-							AND = {
- #These states start out with naval bases in western France
-			14 = { #Brittany
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			23 = { #Poitou
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			19 = { #Aquitaine
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-
-		
-							}
 						}
 					}
 				}
@@ -57733,51 +56948,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_atlantic_naval_dominance }
-							AND = {
-
-			custom_trigger_tooltip = {
-				tooltip = GER_controls_an_atantic_island_tt
-				OR = {
-					914 = { #Jan Mayen
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					100 = { #Iceland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					101 = { #Greenland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					337 = { #Faroes
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					933 = { #Shetlands
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					134 = { #Ireland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					119 = { #North Ireland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					178 = { #The Canaries
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					698 = { #The Azores
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					696 = { #Bermuda
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					697 = { #Madeira
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					702 = { #Cape Verde
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -57904,7 +57074,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_autonomous_organization_todt_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -59559,80 +58729,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_construct_the_kammhuber_line }
-							AND = {
-
-			has_war_with_major = yes
-			is_special_project_completed = sp:sp_air_radar
-			custom_trigger_tooltip = {
-				tooltip = GER_controls_atlantic_coast_brittany_finnmark_tt
-				OR = {
-					925 = { #Finnmark
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					924 = { #Troms
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					144 = { #Nordland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					923 = { #Helgeland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					143 = { #Trondelag
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					142 = { #Vestlandet
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					922 = { #Agder
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					921 = { #Telemark
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					110 = { #Oslo
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					915 = { #Halland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					140 = { #Västergötland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					99 = { #Jylland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					912 = { #Sonderjylland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					36 = { #Friesland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					7 = { #Holland
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					35 = { #Brabant
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					6 = { #Vlaanderen
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					29 = { #Nord-Pas-de_calais
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					785 = { #Picardy
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					15 = { #Normandy
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					14 = { #Brittany
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -60574,14 +59670,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_demands_to_sweden }
-							AND = {
-
-			is_subject = no
-			144 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			918 = { is_fully_controlled_by = SWE }
-
-		
-							}
 						}
 					}
 				}
@@ -61145,7 +60233,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_employ_philipp_holzmann_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -61879,7 +60967,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_expand_gestapo_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -62163,7 +61251,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_expand_ss_security_duties_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -62226,24 +61314,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_expand_the_reichsautobahn_east }
-							AND = {
-
-			OR = {
-				68 = { #Ostmark
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				63 = { #Hinterpommern
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				807 = { #Gdynia
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				85 = { #Danzig
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -62284,24 +61354,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_expand_the_reichsautobahn_south }
-							AND = {
-
-			OR = {
-				53 = { #Niederbayern
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				52 = { #Oberbayern
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				152 = { #Upper Austria
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				4 = { #Lower Austria
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -63209,7 +62261,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_form_organization_todt_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -63590,7 +62642,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_fund_the_film_department_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -63704,7 +62756,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_glorify_party_rallies_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -63908,7 +62960,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_hegemony_of_the_ss_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_3 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 40 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -64773,19 +63825,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_integrate_czech_manufacturers }
-							AND = {
-
-		9 = {
-			state_is_fully_controlled_by_ROOT_or_subject = yes
-		}
-		NOT = { 
-			has_game_rule = { 
-				rule = Germany_czech_manufacturers
-				option = banned
-			}
-		}	
-	
-							}
 						}
 					}
 				}
@@ -65049,7 +64088,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_integration_of_puppet_economies_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_3 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 40 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -66079,7 +65118,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_ministry_of_public_enlightenment_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -66700,16 +65739,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_operation_sea_lion }
-							AND = {
-
-			has_war_with = ENG
-			has_army_manpower = { size > 999999 }
-			custom_trigger_tooltip = {
-			 	tooltip = GER_sea_lion_eq_trigger_tt
-			 	check_variable = { num_equipment_in_armies_k@infantry_equipment > 90 }
-			}
-		
-							}
 						}
 					}
 				}
@@ -66796,7 +65825,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_optimize_reich_labour_service_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				if = { #HESS working on it
 					limit = {
@@ -67168,51 +66197,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = german_focus
 							NOT = { has_completed_focus = GER_party_chancellor_hess }
-							AND = {
-
-			if = {
-				limit = {
-					is_ai = yes
-				}
-				hidden_trigger = {
-					NOT = { has_country_flag = GER_hess_was_ascended_flag } #Flag to prevent AI from taking the focus again after advisor has been replaced}
-				}
-			}
-			
-			has_government = fascism
-			NOT = {
-				has_country_leader = {
-					ruling_only = yes
-					character = GER_rudolf_hess
-				}
-			}
-
-			NOT = { has_country_flag = flight_of_hess }
-			
-			OR = { 
-				NOT = { has_war_with = SOU }
-				NOT = { has_war_with = ENG }
-			}
-			
-			if = {
-				limit = {
-					has_country_flag = GER_inner_circle_event_pending_flag
-				}
-				NOT = { has_country_flag = GER_inner_circle_event_pending_flag }
-			}
-
-			GER_inner_circle_is_ascension_cd_over = yes
-			if = {
-				limit = {
-					has_country_flag = GER_inner_circle_cd_flag
-				}
-				custom_trigger_tooltip = {
-					tooltip = GER_inner_circle_cd_days_tt
-					NOT = {	has_country_flag = GER_inner_circle_cd_flag }
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -67347,7 +66331,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_plenipotentiary_of_armaments_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -67458,7 +66442,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_plenipotentiary_of_the_four_year_plan_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -68114,7 +67098,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_prioritize_the_four_year_plan_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_1 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -68263,7 +67247,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_propaganda_master_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_3 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 40 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -68524,7 +67508,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_rally_the_industrialists_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -72086,7 +71070,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_strengthen_the_waffen_ss_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_2 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 20 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				custom_override_tooltip = {
 					tooltip = {
@@ -74024,7 +73008,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_total_control_over_domestic_affairs_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_3 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 40 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				if = { #HESS working on it
 					limit = {
@@ -75170,7 +74154,7 @@ host_tool_focus_category = {
 				limit = {
 					has_country_flag = GER_wunderwaffe_in_progress_flag
 				}
-				set_temp_variable = { temp_focus_days = @inner_circle_time_tier_3 } #For tooltip purposes
+				set_temp_variable = { temp_focus_days = 40 } #For tooltip purposes
 				multiply_temp_variable = { temp_focus_days = 7 } #The constant uses focus cost which is in weeks, so convert to days
 				if = { #TODT working on it
 					limit = {
@@ -75898,74 +74882,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = hungarian_focus
 							NOT = { has_completed_focus = HUN_bomber_competition }
-							AND = {
-
-			if = {
-				limit = {
-					NOT = {
-						has_dlc = "By Blood Alone"
-					}
-				}
-				NOT = {
-					has_tech = CAS3
-					has_tech = tactical_bomber3
-				}
-			}
-			else = {
-				NOT = {
-					has_tech = advanced_small_airframe
-					has_tech = advanced_medium_airframe
-				}
-			}
-			OR = {
-				GER = {
-					custom_trigger_tooltip = {
-						tooltip = bomber_tt
-						OR = {
-							is_available_cas_HUN = yes
-							is_available_tac_HUN = yes
-						}
-					}
-				}
-				FRA = {
-					custom_trigger_tooltip = {
-						tooltip = bomber_tt
-						OR = {
-							is_available_cas_HUN = yes
-							is_available_tac_HUN = yes
-						}
-					}
-				}
-				ITA = {
-					custom_trigger_tooltip = {
-						tooltip = bomber_tt
-						OR = {
-							is_available_cas_HUN = yes
-							is_available_tac_HUN = yes
-						}
-					}
-				}
-				ENG = {
-					custom_trigger_tooltip = {
-						tooltip = bomber_tt
-						OR = {
-							is_available_cas_HUN = yes
-							is_available_tac_HUN = yes
-						}
-					}
-				}
-				USA = {
-					custom_trigger_tooltip = {
-						tooltip = bomber_tt
-						OR = {
-							is_available_cas_HUN = yes
-							is_available_tac_HUN = yes
-						}
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -77155,74 +76071,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = hungarian_focus
 							NOT = { has_completed_focus = HUN_fighter_competition }
-							AND = {
-
-			if = {
-				limit = {
-					NOT = {
-						has_dlc = "By Blood Alone"
-					}
-				}
-				NOT = {
-					has_tech = fighter3
-					has_tech = heavy_fighter3
-				}
-			}
-			else = {
-				NOT = {
-					has_tech = advanced_small_airframe
-					has_tech = advanced_medium_airframe
-				}
-			}
-			OR = {
-				GER = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				FRA = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				ITA = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				ENG = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				USA = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -77553,14 +76401,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = hungarian_focus
 							NOT = { has_completed_focus = HUN_intervene_in_czechoslovakia }
-							AND = {
-
-			CZE = { exists = yes }
-			NOT = { has_war_with = SOV }
-			CZE = { NOT = { is_in_faction_with = SOV } }
-			SOV_comintern_joinable = yes 
-		
-							}
 						}
 					}
 				}
@@ -77763,23 +76603,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = hungarian_focus
 							NOT = { has_completed_focus = HUN_join_comintern }
-							AND = {
-
-			ANY_comintern_joinable = yes 
-			is_in_faction = no
-			IF = {
-				limit = { SOV = { has_government = communism }}
-				NOT = {
-					any_other_country = {
-						is_in_faction_with = SOV
-						has_war_with = HUN	
-					}
-				}
-			}
-			is_subject = no
-			communism > 0.5
-		
-							}
 						}
 					}
 				}
@@ -78333,21 +77156,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = hungarian_focus
 							NOT = { has_completed_focus = HUN_pressure_romania }
-							AND = {
-
-			ROM = { 
-				exists = yes 
-				NOT = { is_in_faction_with = SOV }
-				NOT = { has_war_with = SOV }
-				OR = {
-					owns_state = 76
-					owns_state = 78
-				}
-			}
-			NOT = { has_war_with = SOV }
-			SOV_comintern_joinable = yes 
-		
-							}
 						}
 					}
 				}
@@ -79019,14 +77827,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = hungarian_focus
 							NOT = { has_completed_focus = HUN_soviet_hungarian_military_academy }
-							AND = {
-
-			SOU = { 
-				exists = yes
-				has_government = communism
-			}
-		
-							}
 						}
 					}
 				}
@@ -79982,19 +78782,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = iraq_focus
 							NOT = { has_completed_focus = IRQ_assasination_of_sidqi }
-							AND = {
-
-			OR = {
-				has_country_leader = {
-					ruling_only = yes
-					character = IRQ_hikmat_suleiman
-				}
-				NOT = {
-					has_idea = IRQ_ghazi_i
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -83130,13 +81917,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_albanian_fascist_militia }
-							AND = {
-
-			44 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -83217,14 +81997,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_albanian_oil }
-							AND = {
-
-			44 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			has_tech = synth_oil_experiments
-		
-							}
 						}
 					}
 				}
@@ -84835,17 +83607,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_comandante_diavolo }
-							AND = {
-
-			any_state = {
-				OR = {
-					
-					is_core_of = ETH
-				}
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -85331,34 +84092,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_corpo_di_truppe_volontarie }
-							AND = {
-
-			if = {
-				limit = {
-					NOT = { has_dlc = "La Resistance" }
-				}
-				any_other_country = {
-					original_tag = SPR
-					has_government = fascism
-					has_volunteers_amount_from = {
-						tag = ITA
-						count > 1
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_dlc = "La Resistance"
-				}
-				SPA = {
-					has_volunteers_amount_from = {
-						tag = ITA
-						count > 1
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -85751,31 +84484,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_demand_balearic_islands_bba }
-							AND = {
-
-			if = {
-				limit = {
-					NOT = { has_dlc = "La Resistance" }
-				}
-				any_other_country = {
-					original_tag = SPR
-					has_government = fascism
-					has_war = no
-					owns_state = 177
-				}
-			}
-			if = {
-				limit = {
-					has_dlc = "La Resistance"
-				}
-				SPA = {
-					has_war = no
-					owns_state = 177
-				}
-			}
-			is_puppet = no
-		
-							}
 						}
 					}
 				}
@@ -87574,17 +86282,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_gloria_al_regno_d_italia }
-							AND = {
-
-			ITA_is_ruled_by_a_monarchy = yes
-			44 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			103 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -89309,22 +88006,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_libyan_railway }
-							AND = {
-
-			448 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			449 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			450 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			451 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -89365,17 +88046,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_libyan_refineries }
-							AND = {
-
-			450 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-				NOT = {
-					has_state_flag = benghazi_oil_developed
-				}
-			}
-			has_tech = synth_oil_experiments
-		
-							}
 						}
 					}
 				}
@@ -89416,24 +88086,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_litoranea_balbo }
-							AND = {
-
-			OR = {
-				448 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				449 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				450 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				451 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -91566,13 +90218,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_prospect_for_oil }
-							AND = {
-
-			662 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -92565,12 +91210,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_seek_papal_support }
-							AND = {
-
-			NOT = { has_country_flag = ITA_revoked_lateran_treaty_flag }
-			NOT = { country_exists = PAP }
-		
-							}
 						}
 					}
 				}
@@ -93295,16 +91934,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_strengthen_ascari_corps }
-							AND = {
-
-			any_state = {
-				OR = {
-					is_on_continent = africa
-				}
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -93553,13 +92182,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_superaereo }
-							AND = {
-
-			any_enemy_country = {
-				is_major_not_original_tag_root = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -93600,13 +92222,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_superesercito }
-							AND = {
-
-			any_enemy_country = {
-				is_major_not_original_tag_root = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -93647,13 +92262,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_supermarina }
-							AND = {
-
-			any_enemy_country = {
-				is_major_not_original_tag_root = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -93694,13 +92302,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_support_albanian_irredentism }
-							AND = {
-
-			44 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -94032,15 +92633,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_the_fight_against_stalinism }
-							AND = {
-
-			country_exists = SOU
-			NOT = { is_in_faction_with = SOU }
-			NOT = { has_guaranteed = SOU }
-			NOT = { is_guaranteed_by = SOU }
-			NOT = { has_non_aggression_pact_with = SOU }
-		
-							}
 						}
 					}
 				}
@@ -94347,11 +92939,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_the_italian_liberation_war }
-							AND = {
-
-			tag = RDS
-		
-							}
 						}
 					}
 				}
@@ -94432,11 +93019,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_the_italian_social_republic }
-							AND = {
-
-			tag = RSI
-		
-							}
 						}
 					}
 				}
@@ -94630,36 +93212,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_the_new_emperor_of_ethiopia }
-							AND = {
-
-			custom_trigger_tooltip = {
-				tooltip = ITA_all_eth_initial_states_controlled_tt
-				NOT = {
-					any_state = {
-						is_initial_ethiopian_state = yes
-						is_controlled_by_ROOT_or_subject = no
-					}
-				}
-			}
-			
-			OR = {
-				custom_trigger_tooltip = {
-					tooltip = ITA_the_new_emperor_of_ethiopia_has_idea_vittorio_emanuele_tt
-					OR = {
-						has_idea = vittorio_emanuele
-						has_idea = vittorio_emanuele_king_of_albania
-					}
-				}
-				has_country_leader = {
-					character = ITA_vittorio_emanuele_iii
-					ruling_only = yes
-				}
-				has_completed_focus = ITA_capo_supremo
-				has_completed_focus = ITA_divino_duce
-			}
-			is_subject = no
-		
-							}
 						}
 					}
 				}
@@ -95383,16 +93935,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = italian_focus
 							NOT = { has_completed_focus = ITA_via_della_vittoria }
-							AND = {
-
-			451 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			452 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -95648,43 +94190,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_a_free_asia_pacific }
-							AND = {
-
-			has_government = communism 
-			is_subject = no
-			surrender_progress < 0.02
-			282 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			613 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			1021 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			995 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			524 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			328 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			327 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			289 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			523 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			408 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -95977,41 +94482,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_a_red_dawn_over_asia }
-							AND = {
-
-			surrender_progress < 0.02
-			282 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			613 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			1021 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			995 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			524 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			629 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			328 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			327 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			289 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			523 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -96237,31 +94707,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_achieving_joubukkokudo }
-							AND = {
-
-			is_subject = no
-			has_government = communism
-			has_country_leader = {
-				ruling_only = yes
-				character = JAP_giro_senoo
-			}	
-			surrender_progress < 0.01
-			has_war_support > 0.8
-			has_stability > 0.8
-			282 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			525 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			608 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			671 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -98394,13 +96839,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_construct_the_sui_ho_dam }
-							AND = {
-
-			716 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -99437,16 +97875,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_develop_the_chinese_resources }
-							AND = {
-
-			has_tech = excavation1
-			605 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			325 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			597 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			614 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			602 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-		
-							}
 						}
 					}
 				}
@@ -99487,13 +97915,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_develop_the_south_seas_mandate }
-							AND = {
-
-			647 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -99894,24 +98315,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_eastern_road_and_steel_expansion }
-							AND = {
-
-			328 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-			OR = {
-				AND = {
-					527 = {
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-					1028 = {
-						state_is_fully_controlled_by_ROOT_or_subject = yes
-					}
-				}
-				
-			}
-		
-							}
 						}
 					}
 				}
@@ -100926,18 +99329,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_establish_the_northern_resource_area }
-							AND = {
-
-			has_tech = excavation1
-			564 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			OR = {
-				657 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				408 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				560 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				409 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			}
-		
-							}
 						}
 					}
 				}
@@ -103369,13 +101760,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_hydroelectric_dams_in_korea }
-							AND = {
-
-			1029 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -103719,13 +102103,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_improve_agricultural_output }
-							AND = {
-
-			524 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -104635,13 +103012,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_join_comintern }
-							AND = {
-
-			has_government = communism
-			is_subject = no
-			SOV_comintern_joinable = yes 
-		
-							}
 						}
 					}
 				}
@@ -104854,17 +103224,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_kikues_new_model }
-							AND = {
-
-			OR = {
-				has_idea = JAP_yamakawa_kikue
-				has_country_leader = {
-					ruling_only = yes
-					character = JAP_yamakawa_kikue
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -105365,20 +103724,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_ministry_of_colonial_affairs }
-							AND = {
-
-			OR = {
-				has_subject = MAN
-			
-				524 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				647 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -107398,13 +105743,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_prepare_the_northern_front }
-							AND = {
-
-			714 = { 
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}	
-		
-							}
 						}
 					}
 				}
@@ -108594,18 +106932,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_reorganized_national_government }
-							AND = {
-
-			is_subject = no
-			OR = {
-				has_government = neutrality
-				has_government = fascism
-			}
-			613 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -109022,18 +107348,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_revoke_the_peace_preservation_law }
-							AND = {
-
-			is_subject = no
-			has_civil_war = no
-			custom_trigger_tooltip = {
-				tooltip = JAP_revoke_the_peace_preservation_law_requirements_tt
-				set_temp_variable = { JAP_lw_support = party_popularity@democratic }
-				add_to_temp_variable = { JAP_lw_support = party_popularity@communism }
-				check_variable = { JAP_lw_support > 0.5 }
-			}
-		
-							}
 						}
 					}
 				}
@@ -109305,18 +107619,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_sea_establish_the_northern_resource_area }
-							AND = {
-
-			has_tech = excavation1
-			564 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			OR = {
-				657 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				408 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				560 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				409 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			}
-		
-							}
 						}
 					}
 				}
@@ -109357,22 +107659,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_sea_exploit_southern_resource_area }
-							AND = {
-
-			has_tech = excavation1
-			OR = {
-				333 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				672 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				334 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				1023 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				1024 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				669 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			}
-			336 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			671 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			1021 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-		
-							}
 						}
 					}
 				}
@@ -109885,13 +108171,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_sea_promote_japanese_settlement }
-							AND = {
-
-			715 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			610 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			328 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-		
-							}
 						}
 					}
 				}
@@ -112056,41 +110335,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_the_eternal_kingdom }
-							AND = {
-
-			surrender_progress < 0.05
-			282 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			613 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			1021 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			995 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			524 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			629 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			328 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			327 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			289 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			638 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -113031,30 +111275,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_the_pacific_union_of_soviet_socialist_republics }
-							AND = {
-
-			has_government = communism
-			is_subject = no
-			282 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			524 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			613 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			608 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			1037 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-			592 = {
-				is_controlled_by_ROOT_or_ally = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -113276,13 +111496,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_the_shuilikeng_power_plant }
-							AND = {
-
-			524 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -114010,28 +112223,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_transformation_of_nature }
-							AND = {
-
-			has_tech = excavation1
-			OR = {
-				333 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				672 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				334 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				1023 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				1024 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-				669 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			}
-			336 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			671 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			1021 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			605 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			325 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			597 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			614 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			602 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-			564 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
-		
-							}
 						}
 					}
 				}
@@ -114117,57 +112308,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_unsinkable_aircraft_carriers }
-							AND = {
-
-			OR = {
-				647 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				684 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				633 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				646 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				#638 = {
-				#	state_is_fully_controlled_by_ROOT_or_subject = yes
-				#}
-				725 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				639 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				643 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				734 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				636 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				635 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				1071 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				#726 = {
-				#	state_is_fully_controlled_by_ROOT_or_subject = yes
-				#}
-				648 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-				645 = {
-					state_is_fully_controlled_by_ROOT_or_subject = yes
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -114538,17 +112678,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = japan_wtt_focus
 							NOT = { has_completed_focus = JAP_women_in_industry }
-							AND = {
-
-			OR = {
-				has_idea = JAP_yamakawa_kikue
-				has_country_leader = {
-					ruling_only = yes
-					character = JAP_yamakawa_kikue
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -133956,13 +132085,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_assist_the_requetes }
-							AND = {
-
-			SPR_scw_in_progress = yes
-			country_exists = SPB
-			NOT = { has_war_with = SPB }	
-		
-							}
 						}
 					}
 				}
@@ -134645,13 +132767,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_develop_mozambique }
-							AND = {
-
-			544 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -134692,13 +132807,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_develop_north_angola }
-							AND = {
-	
-			796 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}					
-		
-							}
 						}
 					}
 				}
@@ -134739,13 +132847,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_develop_south_angola }
-							AND = {
-
-			540 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -134912,13 +133013,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_expand_the_chinese_territories }
-							AND = {
-		 
-			729 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -135305,13 +133399,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_invest_in_sandalwood_and_coffee_production }
-							AND = {
-
-			721 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -135472,15 +133559,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_join_the_carlist_fight }
-							AND = {
-
-			has_civil_war = no
-			SPR_scw_in_progress = yes
-			country_exists = SPB
-			NOT = { has_war_with = SPB }
-			is_puppet = no
-		
-							}
 						}
 					}
 				}
@@ -135521,13 +133599,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_join_the_comintern }
-							AND = {
-
-			is_in_faction = no
-			SOV_comintern_joinable = yes 
-			has_government = communism	
-		
-							}
 						}
 					}
 				}
@@ -136232,13 +134303,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_observation_mission }
-							AND = {
-	
-			SPR_scw_in_progress = yes
-			country_exists = SPA	
-			NOT = { has_war_with = SPA }	
-		
-							}
 						}
 					}
 				}
@@ -136545,13 +134609,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_portuguese_oil }
-							AND = {
-
-			796 = {
-				state_is_fully_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -137341,15 +135398,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_send_assistance }
-							AND = {
-
-			has_civil_war = no
-			SPR_scw_in_progress = yes
-			country_exists = SPA
-			NOT = { has_war_with = SPA }
-			is_puppet = no
-		
-							}
 						}
 					}
 				}
@@ -137558,13 +135606,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_support_a_spanish_monarchy_in_the_war }
-							AND = {
-
-			SPR_scw_in_progress = yes
-			country_exists = SPB
-			NOT = { has_war_with = SPB }	
-		
-							}
 						}
 					}
 				}
@@ -137605,13 +135646,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_support_the_spanish_nationalists }
-							AND = {
-	
-			SPR_scw_in_progress = yes
-			country_exists = SPA
-			NOT = { has_war_with = SPA }
-		
-							}
 						}
 					}
 				}
@@ -138073,17 +136107,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_the_royal_iberian_alliance }
-							AND = {
-
-			is_in_faction = no
-			has_country_leader = { name = "Dom Duarte Nuno" }
-			has_global_flag = scw_over
-			has_completed_focus = POR_restoration_of_the_monarchy
-			country_exists = SPB
-			NOT = { has_war_with = SPB }
-			SPB = { has_completed_focus = SPA_restore_the_monarchy }
-		
-							}
 						}
 					}
 				}
@@ -138124,31 +136147,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_they_need_our_help }
-							AND = {
-
-			has_civil_war = no
-			SPR_scw_in_progress = yes
-			if = {
-				limit = {
-					NOT = { has_global_flag = spanish_civil_war }
-				}
-				custom_trigger_tooltip = {
-				    tooltip = POR_spr_tooltip_country_exist_tt
-				    country_exists = SPR
-			    }
-			    custom_trigger_tooltip = {
-				    tooltip = POR_spr_tooltip_at_peace_tt
-					NOT = { has_war_with = SPR }
-			    }
-			}
-			else = {
-				country_exists = SPD
-				NOT = {has_war_with = SPD }
-			}
-			has_government = communism
-			is_puppet = no
-		
-							}
 						}
 					}
 				}
@@ -138269,28 +136267,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_visit_the_front }
-							AND = {
-
-			SPR_scw_in_progress = yes
-			if = {
-				limit = {
-					NOT = { has_global_flag = spanish_civil_war }
-				}
-				custom_trigger_tooltip = {
-				    tooltip = POR_spr_tooltip_country_exist_tt
-				    country_exists = SPR
-			    }
-			    custom_trigger_tooltip = {
-				    tooltip = POR_spr_tooltip_at_peace_tt
-					NOT = { has_war_with = SPR }
-			    }
-			}
-			else = {
-				country_exists = SPD
-				NOT = {has_war_with = SPD }
-			}
-		
-							}
 						}
 					}
 				}
@@ -138331,29 +136307,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = portuguese_focus
 							NOT = { has_completed_focus = POR_workers_of_iberia_unite }
-							AND = {
-
-			SPR_scw_in_progress = yes
-			if = {
-				limit = {
-					NOT = { has_global_flag = spanish_civil_war }
-				}
-				custom_trigger_tooltip = {
-				    tooltip = POR_spr_tooltip_country_exist_tt
-				    country_exists = SPR
-			    }
-			    custom_trigger_tooltip = {
-				    tooltip = POR_spr_tooltip_at_peace_tt
-					NOT = { has_war_with = SPR }
-			    }
-			}
-			else = {
-				country_exists = SPD
-				NOT = {has_war_with = SPD }
-			}
-			is_puppet = no
-		
-							}
 						}
 					}
 				}
@@ -144445,13 +142398,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = indian_focus_goe
 							NOT = { has_completed_focus = RAJ_holding_the_gates_of_india }
-							AND = {
-
-		990 = { #MANIPUR (Imphal)
-			state_is_fully_controlled_by_ROOT_or_subject = yes
-		}
-	
-							}
 						}
 					}
 				}
@@ -164378,15 +162324,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_approach_germany }
-							AND = {
-
-			NOT = { has_country_flag = SOV_paranoia_system_active_flag }
-			country_exists = GER
-			GER = { SOV_is_valid_subject = yes }
-			NOT = { has_war_with = GER }
-			is_subject = no
-		
-							}
 						}
 					}
 				}
@@ -172732,17 +170669,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_soviet_japanese_pact_against_usa_focus }
-							AND = {
-
-			NOT = { has_country_flag = SOV_paranoia_system_active_flag }
-			country_exists = JAP
-			NOT = { has_war_with = JAP }
-			is_subject = no
-			JAP = {
-				SOV_is_valid_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -174398,37 +172324,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_the_gobi_gambit }
-							AND = {
-
-			#SOV controls the states in which railway lines will be built
-	
-			#TASHKENT
-			405 = {
-				is_controlled_by_ROOT_or_subject = yes 
-			}
-
-			#KYZYL ORDA
-			404 = {
-				is_controlled_by_ROOT_or_subject = yes 
-			}
-
-			#PAMIR
-			732 = {
-				is_controlled_by_ROOT_or_subject = yes 
-			}
-
-			#ALMA-ATA
-			586 = {
-				is_controlled_by_ROOT_or_subject = yes 
-			}
-
-			OR = { 
-
-			}
-
-			is_subject = no
-		
-							}
 						}
 					}
 				}
@@ -175171,12 +173066,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_the_plan_for_the_coup }
-							AND = {
-
-			SOV_soviet_civil_war_not_started = yes 
-			NOT = { has_idea = SOV_lavrenty_beriya }
-		
-							}
 						}
 					}
 				}
@@ -175347,18 +173236,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_the_socialist_bulwark }
-							AND = {
-
-			has_global_flag = SOV_soviet_civil_war_over 
-			custom_trigger_tooltip = {
-				tooltip = SOV_poum_exists_tt
-				SPC = { 
-					exists = yes 
-					has_completed_focus = SPR_the_anti_fascist_workers_revolution
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -175623,11 +173500,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_the_trade_union_as_labor_organizer }
-							AND = {
-
-			has_idea = SOV_mikhail_tomsky
-		
-							}
 						}
 					}
 				}
@@ -176083,22 +173955,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = soviet_focus
 							NOT = { has_completed_focus = SOV_transformation_of_nature }
-							AND = {
-
-			196 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			251 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			217 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			245 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -176948,11 +174804,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = spanish_focus
 							NOT = { has_completed_focus = SPA_absorb_carlist_remnants }
-							AND = {
-
-			NOT = { country_exists = SPB }
-		
-							}
 						}
 					}
 				}
@@ -183657,11 +181508,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = spanish_focus
 							NOT = { has_completed_focus = SPR_deal_with_the_devil }
-							AND = {
-
-			NOT = { is_subject_of = SOU }
-		
-							}
 						}
 					}
 				}
@@ -183902,15 +181748,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = spanish_focus
 							NOT = { has_completed_focus = SPR_enemies_of_our_enemy }
-							AND = {
-
-			NOT = {
-				has_war_with = GER
-				has_war_with = ITA
-			}
-			NOT = { is_subject_of = SOU }
-		
-							}
 						}
 					}
 				}
@@ -184370,29 +182207,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = spanish_focus
 							NOT = { has_completed_focus = SPR_foreign_industrial_aid }
-							AND = {
-
-			OR = {
-				ENG = {
-					has_idea = SPR_equipment_shipments
-				}
-				USA = {
-					has_idea = SPR_equipment_shipments
-				}
-				FRA = {
-					has_idea = SPR_equipment_shipments
-				}
-				AND = {
-					has_completed_focus = SPR_enemies_of_our_enemy
-					OR = {
-						has_non_aggression_pact_with = GER
-						has_non_aggression_pact_with = ITA
-					}
-				}
-				NOT = { is_subject_of = SOU }
-			}
-		
-							}
 						}
 					}
 				}
@@ -187731,11 +185545,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = spanish_focus
 							NOT = { has_completed_focus = SPR_those_who_would_not_help_us }
-							AND = {
-
-			NOT = { is_subject_of = SOU }
-		
-							}
 						}
 					}
 				}
@@ -197132,13 +194941,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = singapore_focus }
-							AND = {
-
-			336 = {
-				controls_or_subject_of = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -197379,16 +195181,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = uk_asia_focus }
-							AND = {
-
-			336 = {
-				controls_or_subject_of = yes
-			}
-			326 = {
-				controls_or_subject_of = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -197887,13 +195679,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = uk_malta_focus }
-							AND = {
-
-			116 = {
-				controls_or_subject_of = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -197934,13 +195719,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = uk_mediterranean_focus }
-							AND = {
-
-			447 = {
-				controls_or_subject_of = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -198033,13 +195811,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = british_focus
 							NOT = { has_completed_focus = uk_rock_focus }
-							AND = {
-
-			118 = {
-				controls_or_subject_of = yes
-			}
-		
-							}
 						}
 					}
 				}
@@ -199254,15 +197025,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_aid_the_carlist_struggle }
-							AND = {
-
-			has_government = neutrality
-			has_war = no
-			SPR_scw_in_progress = yes
-			country_exists = SPB
-			NOT = { has_war_with = SPB }
-		
-							}
 						}
 					}
 				}
@@ -200806,19 +198568,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_denounce_marxism_leninism }
-							AND = {
-
-			is_subject = no
-			has_government = communism
-			SOU = {
-				exists = yes
-				has_country_leader = {
-					ruling_only = yes
-					character = SOV_iosif_stalin
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -201913,76 +199662,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_extensive_licensing_programs }
-							AND = {
-
-			always = no
-			IF = {
-				limit = {
-					NOT = {
-						has_dlc = "By Blood Alone"
-					}
-				}
-				NOT = {
-					has_tech = fighter3
-					has_tech = heavy_fighter3
-				}
-			}
-			ELSE = {
-				NOT = {
-					has_tech = advanced_small_airframe
-					has_tech = advanced_medium_airframe
-				}
-			}
-			OR = {
-				GER = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				FRA = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				ITA = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				ENG = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-				USA = {
-					custom_trigger_tooltip = {
-						tooltip = fighter_tt
-						OR = {
-							is_available_fighter_HUN = yes
-							is_available_heavy_fighter_HUN = yes
-						}
-					}
-				}
-			}
-
-		
-							}
 						}
 					}
 				}
@@ -202856,19 +200535,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_intervene_in_czechoslovakia }
-							AND = {
-
-			has_government = communism
-			is_subject = no
-			is_in_faction_with = SOV
-			CZE = {
-				exists = yes
-				NOT = { has_war_with = SOV }
-				NOT = { is_in_faction_with = SOV }
-			}
-			SOV_comintern_joinable = yes
-		
-							}
 						}
 					}
 				}
@@ -203344,27 +201010,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_join_the_comintern }
-							AND = {
-
-			ANY_comintern_joinable = yes
-			is_in_faction = no
-			IF = {
-				limit = { SOV = { has_government = communism }}
-				NOT = {
-					any_other_country = {
-						is_in_faction_with = SOV
-						has_war_with = HUN
-					}
-				}
-			}
-			is_subject = no
-			communism > 0.4
-			has_country_leader = {
-				ruling_only = yes
-				character = HUN_matyas_rakosi
-			}
-		
-							}
 						}
 					}
 				}
@@ -204421,24 +202066,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_pressure_romania }
-							AND = {
-
-			is_subject = no
-			has_government = communism
-			is_in_faction_with = SOV
-			ROM = {
-				exists = yes
-				NOT = { is_in_faction_with = SOV }
-				NOT = { has_war_with = SOV }
-				OR = {
-					owns_state = 76
-					owns_state = 78
-				}
-			}
-			NOT = { has_war_with = SOV }
-			SOV_comintern_joinable = yes
-		
-							}
 						}
 					}
 				}
@@ -206205,25 +203832,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_reviving_the_spirit_of_1848 }
-							AND = {
-
-			has_war = no
-			is_subject = no
-			custom_trigger_tooltip = {
-				tooltip = wuw_HUN_reviving_the_spirit_of_1848_requirements_tt
-				OR = {
-					AND = {
-						democratic > party_popularity@neutrality
-						democratic > party_popularity@fascism
-					}
-					AND = {
-						communism > party_popularity@neutrality
-						communism > party_popularity@fascism
-					}
-				}
-			}
-		
-							}
 						}
 					}
 				}
@@ -206614,14 +204222,6 @@ host_tool_focus_category = {
 						OWNER = {
 							has_focus_tree = wuw_hungarian_focus
 							NOT = { has_completed_focus = wuw_HUN_soviet_hungarian_military_academy }
-							AND = {
-
-			SOU = {
-				exists = yes
-				has_government = communism
-			}
-		
-							}
 						}
 					}
 				}

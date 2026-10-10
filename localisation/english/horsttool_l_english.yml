@@ -156,7 +156,7 @@
 
  hosttool.1000.desc:0 "Are you sure you want to move the Host Tool to [?event_target:ht_new_host.GetName] ([?event_target:ht_new_host.GetTag])?\n\nThis will transfer all host privileges to that nation.\n\n[?event_target:ht_new_host.GetAIStatus]"
 
- hosttool.1001.desc:0 "The Host Tool has been transferred to [?event_target:ht_new_host.GetName] ([?event_target:ht_new_host.GetTag]).\n\nAll host privileges and controls are now with this nation."
+ hosttool.1001.desc:0 "The Host Tool has been transferred to [?event_target:ht_note_new_host.GetName] ([?event_target:ht_note_new_host.GetTag]).\n\nAll host privileges and controls are now with this nation."
 
  ai_status_human:0 "§YThis nation is controlled by a human player.§!"
  ai_status_ai:0 "§RWARNING: This nation is controlled by AI! Moving the host tool to an AI nation may make it irreversible unless you use console commands!§!"

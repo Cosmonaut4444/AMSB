@@ -237,38 +237,49 @@ country_event = {
         # while this popup sat open, so a stale confirm is a safe NO-OP - the raw
         # temp_new_host object var is never dereferenced here, and host flags are
         # only cleared once the target is proven alive.
+        # Only the live request of the CURRENT host may act: every handoff clears
+        # ht_host_move_pending on all countries, so a popup a former host left open is a
+        # no-op and cannot touch ht_new_host while a newer request owns it.
         if = {
-            limit = { event_target:ht_new_host = { exists = yes } }
-            # Full privilege handoff: host flags AND all host-only admin state,
-            # so the former host keeps no working picker/decision categories.
-            every_country = {
-                clr_country_flag = host
-                clr_country_flag = pause_blocked
-                clr_country_flag = transfer_enabled
-                clr_country_flag = ht_focus_unc
-                clr_country_flag = ht_focus_com
-                clr_country_flag = ht_law_mode
-                clr_country_flag = ht_spirit_add
-                clr_country_flag = ht_spirit_remove
-                clr_country_flag = ht_annex_pending
+            limit = {
+                has_country_flag = host
+                has_country_flag = ht_host_move_pending
             }
-            clear_variable = global.ht_focus_state
-            clear_global_event_target = ht_focus_state
-            # Old host's marked states must not leak into the new host's session
-            for_each_scope_loop = {
-                array = marked_states
-                clear_variable = mark_status
+            if = {
+                limit = { event_target:ht_new_host = { exists = yes } }
+                # Full privilege handoff: host flags AND all host-only admin state,
+                # so the former host keeps no working picker/decision categories.
+                every_country = {
+                    clr_country_flag = host
+                    clr_country_flag = pause_blocked
+                    clr_country_flag = transfer_enabled
+                    clr_country_flag = ht_focus_unc
+                    clr_country_flag = ht_focus_com
+                    clr_country_flag = ht_law_mode
+                    clr_country_flag = ht_spirit_add
+                    clr_country_flag = ht_spirit_remove
+                    clr_country_flag = ht_annex_pending
+                    clr_country_flag = ht_host_move_pending
+                }
+                clear_variable = global.ht_focus_state
+                clear_global_event_target = ht_focus_state
+                # Old host's marked states must not leak into the new host's session
+                for_each_scope_loop = {
+                    array = marked_states
+                    clear_variable = mark_status
+                }
+                clear_array = marked_states
+                event_target:ht_new_host = {
+                    set_country_flag = host
+                    set_country_flag = transfer_enabled
+                    # notification copy: the broadcast renders after ht_new_host is cleared
+                    save_global_event_target_as = ht_note_new_host
+                }
+                # Send ONE global notification
+                news_event = { id = hosttool.1001 }
             }
-            clear_array = marked_states
-            event_target:ht_new_host = {
-                set_country_flag = host
-                set_country_flag = transfer_enabled
-            }
-            # Send ONE global notification
-            news_event = { id = hosttool.1001 }
-        }
-        else = {
-            # Target died before the confirm - keep the current host untouched
+            # else: target died before the confirm - keep the current host untouched
+            clr_country_flag = ht_host_move_pending
             clear_global_event_target = ht_new_host
         }
         clear_variable = temp_new_host
@@ -276,8 +287,12 @@ country_event = {
 
     option = {
         name = "No, cancel"
+        if = {
+            limit = { has_country_flag = ht_host_move_pending }
+            clr_country_flag = ht_host_move_pending
+            clear_global_event_target = ht_new_host
+        }
         clear_variable = temp_new_host
-        clear_global_event_target = ht_new_host
     }
 }
 
@@ -292,9 +307,9 @@ news_event = {
 
     option = {
         name = "Understood"
-        # Clear the global variable after showing the notification
+        # Broadcast acknowledgements never clear event targets: every player clicks this at a
+        # different time, and a late click must not wipe a newer request's targets.
         clear_variable = global.new_host_country
-        clear_global_event_target = ht_new_host
     }
 }
 # Pause blocker events
@@ -314,7 +329,7 @@ news_event = {
 news_event = {
     id = hosttool.21
     title = "War Declared by Host Tool"
-    desc = "[From.GetName] used the host tool to make [?event_target:ht_war_a.GetName] declare war on [?event_target:ht_war_b.GetName]."
+    desc = "[From.GetName] used the host tool to make [?event_target:ht_note_a.GetName] declare war on [?event_target:ht_note_b.GetName]."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -322,8 +337,6 @@ news_event = {
         name = "War in my war game?Bruh"
         clear_variable = global.war_declarer
         clear_variable = global.war_target
-        clear_global_event_target = ht_war_a
-        clear_global_event_target = ht_war_b
     }
 }
 
@@ -339,8 +352,6 @@ news_event = {
         name = "Hope they like their new home!"
         clear_variable = global.switch_from
         clear_variable = global.switch_to
-        clear_global_event_target = ht_switch_from
-        clear_global_event_target = ht_switch_to
     }
 }
 
@@ -745,9 +756,10 @@ news_event = {
     }
 }
 
-# Fix AI control: hidden return event, fired to the HOST 2h after the player was parked on
-# VEN. Scheduling on the host - not the glitched country, not landless VEN - guarantees the
-# cleanup below ALWAYS runs even if the glitched country was annexed meanwhile.
+# Fix AI control: hidden return event, fired 2h after the player was parked on VEN. It is
+# scheduled on BOTH the host and WST (fix_ai_control_click) so the cleanup below runs even if
+# one of them - or the glitched country - disappears meanwhile; whichever copy runs first does
+# the work and releases the guard, the other finds it released and does nothing.
 country_event = {
     id = hosttool.60
     title = "Fix AI Control"
@@ -759,18 +771,19 @@ country_event = {
     option = {
         name = "Return the player"
         if = {
-            limit = { event_target:ht_aifix_country = { exists = yes } }
-            event_target:ht_aifix_country = { change_tag_from = VEN }
-            event_target:ht_aifix_country = { save_global_event_target_as = ai_fix_country }
-            every_country = {
-                limit = { is_ai = no }
+            limit = { has_variable = global.ai_fix_return_country }
+            if = {
+                limit = { event_target:ht_aifix_country = { exists = yes } }
+                event_target:ht_aifix_country = { change_tag_from = VEN }
+                event_target:ht_aifix_country = { save_global_event_target_as = ai_fix_country }
+                # news hosttool.62 is major: one send reaches every player
                 news_event = { id = hosttool.62 }
             }
+            # else: the glitched country died while the player was parked; they stay on VEN,
+            # which is also the observer tag, and the guards below are released.
+            clear_variable = global.ai_fix_return_country
+            clear_global_event_target = ht_aifix_country
         }
-        # else: the glitched country died while the player was parked; they stay on VEN,
-        # which is also the observer tag, and the guards below are released.
-        clear_variable = global.ai_fix_return_country
-        clear_global_event_target = ht_aifix_country
     }
 }
 
@@ -808,70 +821,84 @@ country_event = {
 
     option = {
         name = "Yes, annex them"
-        clr_country_flag = ht_annex_pending
-        # AMSB: both sides were captured as ENGINE-MANAGED global event targets at click time
-        # (annex_country_click). The engine invalidates them if either country dies before this
-        # option runs, so the liveness guard turns a stale confirm into a safe no-op instead of
-        # a use-after-free. Raw object vars (ROOT.target/taker) are never dereferenced here.
+        # Only the live request of the CURRENT host may act. A host handoff clears
+        # ht_annex_pending on every country, so a popup a former host left open is a no-op and
+        # cannot annex (or clear) the targets a newer request by the new host captured.
         if = {
             limit = {
-                event_target:ht_annexed_country = { exists = yes is_ai = yes }
-                event_target:ht_annexer_country = { exists = yes }
+                has_country_flag = host
+                has_country_flag = ht_annex_pending
             }
-            # crash-correlation breadcrumb: the annex EXECUTES here, not at click time
-            # AMSB 2026-08-12: annex also CORES the annexed land for the annexer (user request).
-            # Runs before annex_country while the target still owns its states; event targets
-            # only, same liveness guard as the annex itself (add_core_of = event_target: has
-            # in-tree precedent at common/decisions/RAJ_GOE.txt:726).
-            event_target:ht_annexed_country = {
-                every_owned_state = {
-                    add_core_of = event_target:ht_annexer_country
+            clr_country_flag = ht_annex_pending
+            # AMSB: both sides were captured as ENGINE-MANAGED global event targets at click time
+            # (annex_country_click). The engine invalidates them if either country dies before this
+            # option runs, so the liveness guard turns a stale confirm into a safe no-op instead of
+            # a use-after-free. Raw object vars (ROOT.target/taker) are never dereferenced here.
+            if = {
+                limit = {
+                    event_target:ht_annexed_country = { exists = yes is_ai = yes }
+                    event_target:ht_annexer_country = { exists = yes }
                 }
+                # crash-correlation breadcrumb: the annex EXECUTES here, not at click time
+                # AMSB 2026-08-12: annex also CORES the annexed land for the annexer (user request).
+                # Runs before annex_country while the target still owns its states; event targets
+                # only, same liveness guard as the annex itself (add_core_of = event_target: has
+                # in-tree precedent at common/decisions/RAJ_GOE.txt:726).
+                event_target:ht_annexed_country = {
+                    every_owned_state = {
+                        add_core_of = event_target:ht_annexer_country
+                    }
+                    # notification copy: the broadcast renders after the operation targets
+                    # below are cleared
+                    save_global_event_target_as = ht_note_annexed
+                }
+                event_target:ht_annexer_country = { save_global_event_target_as = ht_note_annexer }
+                log = "HOSTTOOL: annex_executed [?event_target:ht_annexed_country.GetName] -> [?event_target:ht_annexer_country.GetName]"
+                event_target:ht_annexer_country = {
+                    annex_country = { target = event_target:ht_annexed_country transfer_troops = yes }
+                }
+                news_event = { id = hosttool.64 }
             }
-            log = "HOSTTOOL: annex_executed [?event_target:ht_annexed_country.GetName] -> [?event_target:ht_annexer_country.GetName]"
-            event_target:ht_annexer_country = {
-                annex_country = { target = event_target:ht_annexed_country transfer_troops = yes }
-            }
-            news_event = { id = hosttool.64 }
-        }
-        else = {
-            # Stale/dead confirm: annex skipped; drop the captured targets too
+            # else: stale/dead confirm, annex skipped
             clear_global_event_target = ht_annexed_country
             clear_global_event_target = ht_annexer_country
+            for_each_scope_loop = {
+                array = marked_states
+                clear_variable = mark_status
+            }
+            clear_array = marked_states
+            clear_variable = target
+            clear_variable = taker
+            clear_variable = first_marked_state
         }
-        for_each_scope_loop = {
-            array = marked_states
-            clear_variable = mark_status
-        }
-        clear_array = marked_states
-        clear_variable = target
-        clear_variable = taker
-        clear_variable = first_marked_state
     }
 
     option = {
         name = "No, cancel"
-        clr_country_flag = ht_annex_pending
-        clear_variable = target
-        clear_variable = taker
-        clear_global_event_target = ht_annexed_country
-        clear_global_event_target = ht_annexer_country
+        if = {
+            limit = { has_country_flag = ht_annex_pending }
+            clr_country_flag = ht_annex_pending
+            clear_variable = target
+            clear_variable = taker
+            clear_global_event_target = ht_annexed_country
+            clear_global_event_target = ht_annexer_country
+        }
     }
 }
 
 news_event = {
     id = hosttool.64
     title = "Host Tool - Country Annexed"
-    desc = "[?event_target:ht_annexed_country.GetName] has been annexed into [?event_target:ht_annexer_country.GetName] by the host tool."
+    desc = "[?event_target:ht_note_annexed.GetName] has been annexed into [?event_target:ht_note_annexer.GetName] by the host tool."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
     option = {
         name = "So it goes"
+        # Broadcast acknowledgements never clear event targets: every player clicks this at a
+        # different time, and a late click must not wipe a newer request's targets.
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_annexed_country
-        clear_global_event_target = ht_annexer_country
     }
 }
 
@@ -886,8 +913,6 @@ news_event = {
         name = "Peace in our time"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
-        clear_global_event_target = ht_note_b
     }
 }
 
@@ -902,8 +927,6 @@ news_event = {
         name = "Gloves off"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
-        clear_global_event_target = ht_note_b
     }
 }
 
@@ -918,8 +941,6 @@ news_event = {
         name = "Welcome aboard"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
-        clear_global_event_target = ht_note_b
     }
 }
 
@@ -934,8 +955,6 @@ news_event = {
         name = "Out you go"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
-        clear_global_event_target = ht_note_b
     }
 }
 
@@ -950,8 +969,6 @@ news_event = {
         name = "Stand down"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
-        clear_global_event_target = ht_note_b
     }
 }
 
@@ -966,7 +983,6 @@ news_event = {
         name = "New management terms"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
     }
 }
 
@@ -977,19 +993,10 @@ news_event = {
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
-    immediate = {
-        # Writers (host_tool_focus_picker decisions) still set raw global.ht_diplo_a right
-        # before firing; convert to an engine-managed event target while it is still alive.
-        if = {
-            limit = { has_variable = global.ht_diplo_a }
-            var:global.ht_diplo_a = { save_global_event_target_as = ht_note_a }
-        }
-    }
     option = {
         name = "History rewritten"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
     }
 }
 
@@ -1004,6 +1011,5 @@ news_event = {
         name = "Peace in our time"
         clear_variable = global.ht_diplo_a
         clear_variable = global.ht_diplo_b
-        clear_global_event_target = ht_note_a
     }
 }
