@@ -2471,12 +2471,10 @@ on_actions = {
 						original_tag = JAP
 					}
 				}
-				JAP = {
-					annex_country = {
-						target = ROOT
-						transfer_troops = no 
-					}	
-				}
+				# AMSB: annex one hour later (events/zz_amsb_safety_events.txt). Annexing frees this dynamic
+				# country, and on_capitulation handlers in later files (15_mun, 16_taog, hmm) still read ROOT.
+				set_country_flag = amsb_annex_into_jap_pending
+				JAP = { country_event = { id = amsb_safety.1 hours = 1 } }
 			}
 		}
 

@@ -525,17 +525,24 @@ st_country_powers = {
 			var:ROOT.marked_states^0 = { owner = { set_variable = { ROOT.target = this } } }
 			if = { limit = { check_variable = { ROOT.target = ROOT.taker } } }
 			else = {
+				# AMSB: mark the target's core states BEFORE the annex. The old post-annex
+				# is_core_of = var:ROOT.target read the annexed country, which is freed when it is
+				# a dynamic tag (use-after-free; scripted GUI effects run on every client).
 				var:ROOT.target = {
+					every_core_state = { set_state_flag = ht_annex_core_mark }
 					var:ROOT.taker = {
 						annex_country = { target = PREV transfer_troops = yes }
-						every_state = { 
-							limit = { 
-								is_owned_by = var:ROOT.taker 
-								is_core_of = var:ROOT.target
-							}
-							add_compliance = 80
-						}
 					}
+				}
+				var:ROOT.taker = {
+					every_owned_state = {
+						limit = { has_state_flag = ht_annex_core_mark }
+						add_compliance = 80
+					}
+				}
+				every_state = {
+					limit = { has_state_flag = ht_annex_core_mark }
+					clr_state_flag = ht_annex_core_mark
 				}
 			}
 			

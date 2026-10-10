@@ -1,0 +1,23 @@
+add_namespace = amsb_safety
+
+# Fired from common/on_actions/14_sea_on_actions.txt on_capitulation (three-way Japanese civil war).
+# Performs the annex of the defeated democratic Japan outside the on_capitulation chain: annex_country
+# frees a dynamic country immediately, and later on_capitulation handlers would read the freed ROOT.
+country_event = {
+	id = amsb_safety.1
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		random_country = {
+			limit = { has_country_flag = amsb_annex_into_jap_pending }
+			clr_country_flag = amsb_annex_into_jap_pending
+			ROOT = {
+				annex_country = {
+					target = PREV
+					transfer_troops = no
+				}
+			}
+		}
+	}
+}
