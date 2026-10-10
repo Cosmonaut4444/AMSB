@@ -106,6 +106,7 @@ ideas = {
 			modifier = {
 				training_time_army_factor = -0.89
 			}
+		}
 		noresistance = {
 			allowed = {
 				always = no

@@ -1,0 +1,509 @@
+# AMSB roster restore: definitions for characters that history/countries already recruits
+# (re-added 2026-08-26) but whose definitions were never ported. Copied verbatim from master:
+# common/characters/SOV.txt (MSB scientists) and common/characters/FRA.txt; SPR ones from vanilla (see below).
+
+characters = {
+	SOV_Boris_Georgievich_Chilikin = {
+		name = SOV_Boris_Georgievich_Chilikin
+		portraits = {
+			army = {
+				large = GFX_portrait_SOV_Boris_Georgievich_Chilikin
+			}
+		}
+		scientist = {
+			traits = {
+				scientist_trait_surface_ship_specialist
+			}
+			skills = {
+				specialization_naval = 2
+			}
+		}
+	}
+	SOV_Boris_Mikhailovich_Malinin = {
+		name = SOV_Boris_Mikhailovich_Malinin
+		portraits = {
+			army = {
+				large = GFX_portrait_SOV_Boris_Mikhailovich_Malinin
+			}
+		}
+		scientist = {
+			traits = {
+				scientist_trait_submarine_specialist
+			}
+			skills = {
+				specialization_naval = 2
+			}
+		}
+	}
+	SOV_Joseph_Yakovlevich_Kotin = {
+		name = SOV_Joseph_Yakovlevich_Kotin
+		portraits = {
+			army = {
+				large = GFX_portrait_SOV_Joseph_Yakovlevich_Kotin
+			}
+		}
+		scientist = {
+			traits = {
+				scientist_trait_armored_specialist
+			}
+			skills = {
+				specialization_land = 3
+			}
+		}
+	}
+	SOV_Mikhail_Ilyich_Koshkin = {
+		name = SOV_Mikhail_Ilyich_Koshkin
+		portraits = {
+			army = {
+				large = GFX_portrait_SOV_Mikhail_Ilyich_Koshkin
+			}
+		}
+		scientist = {
+			traits = {
+				scientist_trait_armored_specialist
+				scientist_trait_gifted_engineer
+			}
+			skills = {
+				specialization_land = 3
+			}
+		}
+	}
+	SOV_Vasily_Gavrilovich_Grabin = {
+		name = SOV_Vasily_Gavrilovich_Grabin
+		portraits = {
+			army = {
+				large = GFX_portrait_SOV_Vasily_Gavrilovich_Grabin
+			}
+		}
+		scientist = {
+			traits = {
+				scientist_trait_artillery_specialist
+			}
+			skills = {
+				specialization_land = 3
+			}
+		}
+	}
+	FRA_charles_maurras = {
+		name = FRA_charles_maurras
+		portraits = {
+			civilian = {
+				large = GFX_portrait_FRA_charles_maurras
+				small = GFX_portrait_FRA_charles_maurras_small
+			}
+		}
+		country_leader = {
+			ideology = centrism
+			traits = { editor monarchist_media_mogul }
+			expire = "1949.1.1.12"
+			id = -1
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = charles_maurras
+			allowed  = {
+				original_tag  = FRA
+			}
+			available  = {
+				OR = {
+					always = no 
+					always = no 
+				}
+				OR  = {
+					has_government  = fascism 
+					has_government  = neutrality 
+				}
+			}
+			visible  = {
+				has_dlc = "La Resistance"
+			}
+			cost  = 75.000
+			traits  = {
+				national_integralist 
+			}
+			do_effect  = {
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}		
+	}
+	FRA_marcel_bucard = {
+		name = FRA_marcel_bucard
+		portraits = {
+			civilian = {	
+				large = GFX_portrait_FRA_marcel_bucard
+				small = GFX_portrait_FRA_marcel_bucard_small
+			}
+		}
+		country_leader = {
+			ideology = fascism_ideology
+			traits = { fascist_corporatist }
+			expire = "1949.1.1.12"
+			id = -1
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = marcel_bucard
+			allowed  = {
+				original_tag  = FRA
+			}
+			available  = {
+				OR = {
+					always = no 
+					always = no 
+					has_focus_tree  = vichy_french_focus
+				}
+				IF  = {
+					limit  = {
+						has_dlc = "Man the Guns"
+					}
+					NOT  = {
+						has_autonomy_state  = autonomy_supervised_state
+					}
+				}
+			}
+			traits  = {
+				fascist_demagogue 
+			}
+			do_effect  = {
+				NOT  = {
+					has_government  = fascism 
+				}
+			}
+			on_add  = {
+				IF  = {
+					limit  = {
+						NOT  = {
+							owner = { tag = EFR }
+						}
+					}
+					owner = {
+						country_event = lar_france_political_violence.2
+					}
+				}
+			}
+			ai_will_do = {
+				factor = 0.000
+			}
+		}
+	}
+	FRA_marcel_deat = {
+		name = FRA_marcel_deat
+		portraits = {
+			civilian = {	
+				large = GFX_portrait_FRA_marcel_deat
+				small = GFX_portrait_FRA_marcel_deat_small
+			}
+		}
+		#country_leader = {
+		#	ideology = fascism_ideology
+		#	traits = {  }
+		#	expire = "1949.1.1.12"
+		#	id = -1
+		#}
+		advisor = {
+			slot = political_advisor
+			idea_token = FRA_marcel_deat
+			allowed  = {
+				original_tag = FRA
+			}
+			available  = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+			}
+			cost = 150
+			traits  = {
+				FRA_neo_jacobin
+			}
+			do_effect  = {
+			}
+			ai_will_do  = {
+				base = 1.000
+			}
+		}
+	}
+	FRA_maurice_thorez={ #Communist Leader
+		name=FRA_maurice_thorez
+		portraits={
+			army={
+				small="GFX_idea_maurice_thorez"
+			}
+			civilian={
+				large="GFX_portrait_fra_maurice_thorez"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = maurice_thorez
+			allowed  = {
+				original_tag  = FRA
+			}
+			available  = {
+				or  = {
+					always = no 
+					always = no 
+				}
+				not  = {
+					has_country_leader  = {
+						character  = FRA_philippe_petain
+						ruling_only  = yes 
+					}
+				}
+				if  = {
+					limit  = {
+						has_dlc = "Man the Guns"
+					}
+					not  = {
+						has_autonomy_state  = autonomy_supervised_state
+					}
+				}
+			}
+			traits  = {
+				communist_revolutionary 
+			}
+			do_effect  = {
+				not  = {
+					has_government  = communism 
+				}
+			}
+			on_add  = {
+				FRA_right_wing_riot_effect = yes 
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+		
+		country_leader={
+			ideology=stalinism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	FRA_philippe_henriot={
+		name=FRA_philippe_henriot
+		portraits={
+			army={
+				small="GFX_idea_FRA_philippe_henriot"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = FRA_philippe_henriot
+			allowed  = {
+				original_tag  = FRA
+			}
+			visible  = {
+				has_dlc = "La Resistance"
+			}
+			available  = {
+				always = no 
+				has_government  = fascism 
+			}
+			cost  = 75.000
+			traits  = {
+				propaganda_expert 
+			}
+			do_effect  = {
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+	}
+	# Recruited by history/countries/SPR - Spain.txt (inherited from ZHM) but never defined in this mod.
+	# Copied from vanilla common/characters/SPR.txt; the SWE_refuge_for_revolutionaries_trigger
+	# alternatives were dropped because that scripted trigger does not exist in this mod.
+	SPR_dolores_ibarruri={
+		instance = {
+			allowed = {
+				has_dlc = "La Resistance"
+			}
+			name=SPR_dolores_ibarruri
+			portraits={
+				army={
+					small="GFX_idea_dolores_ibarruri"
+				}
+			}
+			gender = female
+			advisor={
+				slot = political_advisor
+				idea_token = SPR_dolores_ibarruri
+				allowed = {
+					has_dlc = "La Resistance"
+					OR = {
+						original_tag = SPR
+						original_tag = SWE
+					}
+				}
+				visible = {
+					NOT = {
+						tag = SPA 
+						tag = SPB 
+					}
+				}
+				available = {
+					OR = {
+						AND = {
+							OR = {
+								has_completed_focus = SPR_demand_ministerial_positions 
+								has_completed_focus = SPR_communists_in_the_government 
+							}
+							NOT = {
+								has_completed_focus = SPR_masters_of_our_own_fate 
+							}
+							custom_trigger_tooltip = {
+								tooltip = SPR_not_nationalist_spain_tt
+								NOT = {
+									tag = SPA 
+									tag = SPB 
+								}
+							}
+						}
+					}
+				}
+				traits = {
+					la_pasionaria 
+				}
+				ai_will_do = {
+					base = 1.000
+					modifier = {
+						factor = 0.000
+						has_completed_focus = SPR_the_stalinist_doctrine 
+					}
+				}
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "La Resistance" }
+			}
+			name=SPR_dolores_ibarruri
+			portraits={
+				army={
+					small="GFX_idea_dolores_ibarruri"
+				}
+			}
+			gender = female
+			advisor={
+				slot = political_advisor
+				idea_token = SPR_dolores_ibarruri
+				name = SPR_dolores_ibarruri 
+				allowed = {
+					NOT = {
+						has_dlc = "La Resistance"
+					}
+					original_tag = SPR
+					NOT = {
+						has_government = fascism 
+					}
+				}
+				available = {
+					if = {
+						limit = {
+							has_dlc = "Man the Guns"
+						}
+						NOT = {
+							has_autonomy_state = autonomy_supervised_state
+						}
+					}
+				}
+				traits = {
+					communist_revolutionary 
+				}
+			}
+		}
+	}
+	SPR_augusto_barcia_trelles={
+		instance = {
+			allowed = {
+				has_dlc = "La Resistance"
+			}
+			name=SPR_augusto_barcia_trelles
+			portraits={
+				army={
+					small="GFX_idea_SPR_augusto_barcia_trelles"
+				}
+			}
+			advisor={
+				slot = political_advisor
+				idea_token = SPR_augusto_barcia_trelles
+				allowed = {
+					has_dlc = "La Resistance"
+					OR = {
+						original_tag = SPR
+						original_tag = SWE
+					}
+				}
+				visible = {
+					NOT = {
+						tag = SPA 
+						tag = SPB 
+					}
+				}
+				available = {
+					OR = {
+						AND = {
+							NOT = {
+								has_completed_focus = SPR_masters_of_our_own_fate 
+								has_completed_focus = SPR_communists_in_the_government 
+							}
+							custom_trigger_tooltip = {
+								tooltip = SPR_not_nationalist_spain_tt
+								NOT = {
+									tag = SPA 
+									tag = SPB 
+								}
+							}
+						}
+
+					}
+				}
+				traits = {
+					leftist_freemason 
+				}
+				ai_will_do = {
+					base = 1.000
+					modifier = {
+						factor = 0.000
+						OR = {
+							has_completed_focus = SPA_a_great_spain 
+							has_completed_focus = SPR_hinder_nkvd_interference 
+						}
+					}
+				}
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "La Resistance" }
+			}
+			name=SPR_augusto_barcia_trelles
+			portraits={
+				army={
+					small="GFX_idea_generic_army_europe_1"
+				}
+			}
+			advisor={
+				slot = political_advisor
+				idea_token = SPR_augusto_barcia_trelles
+				name = SPR_augusto_barcia_trelles 
+				allowed = {
+					NOT = {
+						has_dlc = "La Resistance"
+					}
+					original_tag = SPR
+					NOT = {
+						has_government = fascism 
+					}
+				}
+				traits = {
+					ideological_crusader 
+				}
+			}
+		}
+	}
+}
