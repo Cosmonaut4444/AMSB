@@ -23,7 +23,8 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = "Ja... Commandant"
-		clear_variable=this.selected_cheat
+		# no selected_cheat clear: that is the host's live selection, and a late
+		# acknowledgement must not wipe a newer one
 		clear_variable=this.target_country
 	}
 }
@@ -48,7 +49,7 @@ news_event = {
 	is_triggered_only = yes
 	option = {
 		name = "ok cool"
-		clear_variable=this.selected_cheat 
+		# no selected_cheat clear (see horsttool.1)
 		clear_variable=this.target_country
 	}
 }
@@ -226,25 +227,24 @@ news_event = {
 country_event = {
     id = hosttool.1000
     title = "Move Host Tool Confirmation"
-    desc = hosttool.1000.desc
+    # each popup names its own request; the global fallback covers a popup without a copy
+    desc = { text = hosttool.1000.desc_req trigger = { has_event_target = ht_req_host } }
+    desc = { text = hosttool.1000.desc trigger = { NOT = { has_event_target = ht_req_host } } }
     picture = GFX_report_event_001
     is_triggered_only = yes
 
     option = {
         name = "Yes, move the host tool"
+        ai_chance = { factor = 0 } # an AI host (dropped player) must never hand the tool away
         # ht_new_host was captured as an ENGINE-MANAGED event target at click time
         # (change_host_nation_click). The engine invalidates it if the country died
         # while this popup sat open, so a stale confirm is a safe NO-OP - the raw
         # temp_new_host object var is never dereferenced here, and host flags are
         # only cleared once the target is proven alive.
-        # Only the live request of the CURRENT host may act: every handoff clears
-        # ht_host_move_pending on all countries, so a popup a former host left open is a
-        # no-op and cannot touch ht_new_host while a newer request owns it.
+        # Only the CURRENT host's live request may act (ht_host_move_request_is_live): a popup
+        # orphaned by Clear All or a handoff can never move the tool for a newer request.
         if = {
-            limit = {
-                has_country_flag = host
-                has_country_flag = ht_host_move_pending
-            }
+            limit = { ht_host_move_request_is_live = yes }
             if = {
                 limit = { event_target:ht_new_host = { exists = yes } }
                 # Full privilege handoff: host flags AND all host-only admin state,
@@ -263,6 +263,9 @@ country_event = {
                 }
                 clear_variable = global.ht_focus_state
                 clear_global_event_target = ht_focus_state
+                # the old host's open annex request dies with its authority
+                clear_global_event_target = ht_annexed_country
+                clear_global_event_target = ht_annexer_country
                 # Old host's marked states must not leak into the new host's session
                 for_each_scope_loop = {
                     array = marked_states
@@ -287,8 +290,10 @@ country_event = {
 
     option = {
         name = "No, cancel"
+        ai_chance = { factor = 1 }
+        # cancels only its own live request, never a newer one
         if = {
-            limit = { has_country_flag = ht_host_move_pending }
+            limit = { ht_host_move_request_is_live = yes }
             clr_country_flag = ht_host_move_pending
             clear_global_event_target = ht_new_host
         }
@@ -329,7 +334,7 @@ news_event = {
 news_event = {
     id = hosttool.21
     title = "War Declared by Host Tool"
-    desc = "[From.GetName] used the host tool to make [?event_target:ht_note_a.GetName] declare war on [?event_target:ht_note_b.GetName]."
+    desc = "[From.GetName] used the host tool to make [?event_target:ht_note_war_a.GetName] declare war on [?event_target:ht_note_war_b.GetName]."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -815,20 +820,19 @@ news_event = {
 country_event = {
     id = hosttool.63
     title = "Annex Confirmation"
-    desc = hosttool.63.desc
+    # each popup names its own request; the global fallback covers a popup without a copy
+    desc = { text = hosttool.63.desc_req trigger = { has_event_target = ht_req_host } }
+    desc = { text = hosttool.63.desc trigger = { NOT = { has_event_target = ht_req_host } } }
     picture = GFX_report_event_001
     is_triggered_only = yes
 
     option = {
         name = "Yes, annex them"
-        # Only the live request of the CURRENT host may act. A host handoff clears
-        # ht_annex_pending on every country, so a popup a former host left open is a no-op and
-        # cannot annex (or clear) the targets a newer request by the new host captured.
+        ai_chance = { factor = 0 } # an AI host (dropped player) must never confirm an annex
+        # Only the CURRENT host's live request may act (ht_annex_request_is_live): a popup
+        # orphaned by Clear All or a host handoff can never annex or clear a newer request.
         if = {
-            limit = {
-                has_country_flag = host
-                has_country_flag = ht_annex_pending
-            }
+            limit = { ht_annex_request_is_live = yes }
             clr_country_flag = ht_annex_pending
             # AMSB: both sides were captured as ENGINE-MANAGED global event targets at click time
             # (annex_country_click). The engine invalidates them if either country dies before this
@@ -875,8 +879,10 @@ country_event = {
 
     option = {
         name = "No, cancel"
+        ai_chance = { factor = 1 }
+        # cancels only its own live request, never a newer one
         if = {
-            limit = { has_country_flag = ht_annex_pending }
+            limit = { ht_annex_request_is_live = yes }
             clr_country_flag = ht_annex_pending
             clear_variable = target
             clear_variable = taker
@@ -905,7 +911,7 @@ news_event = {
 news_event = {
     id = hosttool.65
     title = "Host Tool - White Peace"
-    desc = "The host has white peaced [?event_target:ht_note_a.GetName] with [?event_target:ht_note_b.GetName]."
+    desc = "The host has white peaced [?event_target:ht_note_wp_a.GetName] with [?event_target:ht_note_wp_b.GetName]."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -919,7 +925,7 @@ news_event = {
 news_event = {
     id = hosttool.67
     title = "Host Tool - Truce Cleared"
-    desc = "The host has cleared the truce between [?event_target:ht_note_a.GetName] and [?event_target:ht_note_b.GetName]."
+    desc = "The host has cleared the truce between [?event_target:ht_note_tr_a.GetName] and [?event_target:ht_note_tr_b.GetName]."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -933,7 +939,7 @@ news_event = {
 news_event = {
     id = hosttool.68
     title = "Host Tool - Joined Faction"
-    desc = "The host has added [?event_target:ht_note_b.GetName] to [?event_target:ht_note_a.GetName]'s faction."
+    desc = "The host has added [?event_target:ht_note_fa_b.GetName] to [?event_target:ht_note_fa_a.GetName]'s faction."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -947,7 +953,7 @@ news_event = {
 news_event = {
     id = hosttool.70
     title = "Host Tool - Kicked from Faction"
-    desc = "The host has removed [?event_target:ht_note_b.GetName] from [?event_target:ht_note_a.GetName]'s faction."
+    desc = "The host has removed [?event_target:ht_note_fk_b.GetName] from [?event_target:ht_note_fk_a.GetName]'s faction."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -961,7 +967,7 @@ news_event = {
 news_event = {
     id = hosttool.71
     title = "Host Tool - War Goals Removed"
-    desc = "The host has removed all war goals between [?event_target:ht_note_a.GetName] and [?event_target:ht_note_b.GetName] (both directions)."
+    desc = "The host has removed all war goals between [?event_target:ht_note_wg_a.GetName] and [?event_target:ht_note_wg_b.GetName] (both directions)."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -975,7 +981,7 @@ news_event = {
 news_event = {
     id = hosttool.72
     title = "Host Tool - Autonomy Changed"
-    desc = "The host has changed the autonomy level of [?event_target:ht_note_a.GetName]."
+    desc = "The host has changed the autonomy level of [?event_target:ht_note_au_a.GetName]."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -989,7 +995,7 @@ news_event = {
 news_event = {
     id = hosttool.73
     title = "Host Tool - Focus Tree Modified"
-    desc = "The host has modified the focus tree of [?event_target:ht_note_a.GetName] (completed or uncompleted a focus)."
+    desc = "The host has modified the focus tree of [?event_target:ht_note_fp_a.GetName] (completed or uncompleted a focus)."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes
@@ -1003,7 +1009,7 @@ news_event = {
 news_event = {
     id = hosttool.74
     title = "Host Tool - White Peace (All Wars)"
-    desc = "The host has white peaced [?event_target:ht_note_a.GetName] out of all of its wars."
+    desc = "The host has white peaced [?event_target:ht_note_wp_a.GetName] out of all of its wars."
     picture = GFX_news_event_001
     major = yes
     is_triggered_only = yes

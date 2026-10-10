@@ -5,6 +5,7 @@ host_tool_law_category = {
 	ht_law_undisturbed_isolation = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -21,6 +22,7 @@ host_tool_law_category = {
 	ht_law_isolation = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -37,6 +39,7 @@ host_tool_law_category = {
 	ht_law_civilian_economy = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -53,6 +56,7 @@ host_tool_law_category = {
 	ht_law_low_economic_mobilisation = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -69,6 +73,7 @@ host_tool_law_category = {
 	ht_law_partial_economic_mobilisation = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -85,6 +90,7 @@ host_tool_law_category = {
 	ht_law_war_economy = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -101,6 +107,7 @@ host_tool_law_category = {
 	ht_law_tot_economic_mobilisation = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -117,6 +124,7 @@ host_tool_law_category = {
 	ht_law_totaler_krieg_economy = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -133,6 +141,7 @@ host_tool_law_category = {
 	ht_law_national_defense_state = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -149,6 +158,7 @@ host_tool_law_category = {
 	ht_law_new_economic_policy = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -165,6 +175,7 @@ host_tool_law_category = {
 	ht_law_new_economic_policy_2 = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -181,6 +192,7 @@ host_tool_law_category = {
 	ht_law_capital_investment_model = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -198,6 +210,7 @@ host_tool_law_category = {
 	ht_law_uncontrolled_exports = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -214,6 +227,7 @@ host_tool_law_category = {
 	ht_law_free_trade = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -230,6 +244,7 @@ host_tool_law_category = {
 	ht_law_export_focus = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -246,6 +261,7 @@ host_tool_law_category = {
 	ht_law_limited_exports = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -262,6 +278,7 @@ host_tool_law_category = {
 	ht_law_autarkic_economy = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -278,6 +295,7 @@ host_tool_law_category = {
 	ht_law_autarkic_economy_improved = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -294,6 +312,7 @@ host_tool_law_category = {
 	ht_law_closed_economy = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -310,6 +329,7 @@ host_tool_law_category = {
 	ht_law_special_economic_zones = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -327,6 +347,7 @@ host_tool_law_category = {
 	ht_law_disarmed_nation = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -343,6 +364,7 @@ host_tool_law_category = {
 	ht_law_volunteer_only = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -359,6 +381,7 @@ host_tool_law_category = {
 	ht_law_limited_conscription = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -375,6 +398,7 @@ host_tool_law_category = {
 	ht_law_extensive_conscription = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -391,6 +415,7 @@ host_tool_law_category = {
 	ht_law_service_by_requirement = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -407,6 +432,7 @@ host_tool_law_category = {
 	ht_law_all_adults_serve = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
@@ -423,6 +449,7 @@ host_tool_law_category = {
 	ht_law_scraping_the_barrel = {
 		icon = generic_research
 		cost = 0
+		ai_will_do = { factor = 0 } # host-only admin tool: an AI host must never pick it
 		fire_only_once = no
 		visible = {
 			event_target:ht_focus_state = { owner = { exists = yes } }
