@@ -4293,7 +4293,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4319,7 +4319,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 7
@@ -4342,7 +4342,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 5
@@ -4362,7 +4362,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 5
@@ -4509,7 +4509,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4532,7 +4532,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4555,7 +4555,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4575,7 +4575,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4600,7 +4600,7 @@ focus_tree = {
 							suspension_type_slot = tank_bogie_suspension
 							armor_type_slot = tank_riveted_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4623,7 +4623,7 @@ focus_tree = {
 							suspension_type_slot = tank_bogie_suspension
 							armor_type_slot = tank_riveted_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -4643,7 +4643,7 @@ focus_tree = {
 							suspension_type_slot = tank_bogie_suspension
 							armor_type_slot = tank_riveted_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 10
@@ -12732,7 +12732,7 @@ focus_tree = {
 							suspension_type_slot = tank_christie_suspension
 							armor_type_slot = tank_welded_armor
 							engine_type_slot = tank_diesel_engine
-							special_type_slot_1 = sloped_armor
+							special_type_slot_2 = sloped_armor
 						}
 						upgrades = {
 							tank_nsb_engine_upgrade = 8

@@ -6434,7 +6434,7 @@ country_event = {
 					suspension_type_slot = tank_christie_suspension
 					armor_type_slot = tank_welded_armor
 					engine_type_slot = tank_diesel_engine
-					special_type_slot_1 = sloped_armor
+					special_type_slot_2 = sloped_armor
 				}
 				upgrades = {
 					tank_nsb_engine_upgrade = 8
@@ -10267,7 +10267,7 @@ country_event = {
 					SOV = { add_equipment_to_stockpile = { type = light_tank_equipment_2 amount = 100 producer = GER } }
 				}
 				ELSE = { 
-					SOV = { add_equipment_to_stockpile = { type = light_tank_chassis_2 amount = 100 producer = GER variant_name = "Panzer II Ausf. a" } }
+					SOV = { add_equipment_to_stockpile = { type = light_tank_chassis_2 amount = 100 producer = GER variant_name = "Panzer II Ausf. A" } }
 				}
 				SOV = { add_equipment_to_stockpile = { type = infantry_equipment_0 amount = 200 producer = GER } }
 			}
