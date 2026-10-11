@@ -852,7 +852,7 @@ country_event = {
             # a use-after-free. Raw object vars (ROOT.target/taker) are never dereferenced here.
             if = {
                 limit = {
-                    event_target:ht_annexed_country = { exists = yes is_ai = yes }
+                    event_target:ht_annexed_country = { exists = yes NOT = { tag = ROOT } }
                     event_target:ht_annexer_country = { exists = yes }
                 }
                 # crash-correlation breadcrumb: the annex EXECUTES here, not at click time

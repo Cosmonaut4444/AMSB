@@ -606,7 +606,8 @@ st_country_powers = {
 		annex_country_click = {
 			log = "HOSTTOOL: annex_confirm_opened sel=[This.GetName] annexer=[This.Owner.GetName]"
 			# AMSB: guarded MP-safe annex. Stale target/taker cleared up front; requires a marked
-			# state; one confirm in flight at a time; never annex a human player's country. Both
+			# state; one confirm in flight at a time; other human players may be annexed, but never the
+			# host's own country (the confirm's cleanup runs on ROOT after the annex). Both
 			# sides captured as ENGINE-MANAGED global event targets here (synced click command) so
 			# the confirm desc and the Yes option never deref a raw country-object variable.
 			ROOT = {
@@ -639,7 +640,7 @@ st_country_powers = {
 				if = {
 					limit = {
 						NOT = { check_variable = { ROOT.target = ROOT.taker } }
-						var:ROOT.target = { is_ai = yes }	# never annex a human player's country
+						var:ROOT.target = { NOT = { tag = ROOT } }	# never the host's own country
 					}
 					ROOT = {
 						every_state = { limit = { has_state_flag = ht_live_annex_req } clr_state_flag = ht_live_annex_req }
@@ -1496,13 +1497,10 @@ st_country_powers = {
 		}	
 		award_states_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
 		transfer_occupation_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
-		# Human-played targets stay out (crash-safety guard since the 2026-07-02 audit: annexing a
-		# human's country leaves that client on a dead tag); grey the button instead of letting the
-		# click silently open nothing. Same marked-owner check as tag_switch_button_click_enabled.
 		annex_country_click_enabled = {
 			check_variable = { ROOT.marked_states^num > 0 }
 			owner = { exists = yes }
-			var:ROOT.marked_states^0 = { OWNER = { is_ai = yes } }
+			var:ROOT.marked_states^0 = { OWNER = { NOT = { tag = ROOT } } }	# never the host's own country
 		}
 		puppet_country_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
 		add_cores_click_enabled = { check_variable = { ROOT.marked_states^num > 0 } owner = { exists = yes } }
